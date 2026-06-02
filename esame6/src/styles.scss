@@ -1,0 +1,46 @@
+﻿@import "bootstrap/scss/bootstrap";
+
+// Sfondo hero con immagine (percorso globale — evita hashing Angular nei componenti)
+.hero {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.80), rgba(0, 0, 0, 0.55)), url('assets/img/sfondo1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+app-registrazione .hero {
+  background-image: linear-gradient(rgba(8, 12, 18, 0.6), rgba(8, 12, 18, 0.6)), url('assets/img/sfondo1.jpg');
+}
+
+// Sfondo globale dell'applicazione (nero pieno coerente con il tema Netflix-like)
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #0b0b0d;
+  color: #e9ecef;
+}
+
+// Override ng-select: tema predefinito della libreria di select custom
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+// Forza aspetto dark per i dropdown Bootstrap usati come form-control nella registrazione.
+// La regola è qui (foglio globale, caricato dopo Bootstrap) per garantire la precedenza
+// rispetto ai reset di Bootstrap senza dover usare !important ovunque.
+.card-registrazione .form-control.dropdown-toggle.text-start,
+.card-registrazione .form-control[ngbDropdownToggle] {
+  background-color: rgba(255, 255, 255, 0.035);
+  color: rgba(255, 255, 255, 0.92);
+  padding: .28rem .45rem;
+  border-radius: .25rem;
+  box-shadow: none;
+  font-size: .95rem;
+  line-height: 1.2;
+}
+
+.card-registrazione .form-control.dropdown-toggle.text-start.placeholder,
+.card-registrazione .form-control[ngbDropdownToggle].placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}

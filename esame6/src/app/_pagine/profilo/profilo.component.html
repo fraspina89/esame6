@@ -1,0 +1,294 @@
+<div class="profilo-page py-4">
+  <div class="container">
+
+    <!-- CARICAMENTO -->
+    <div *ngIf="caricamento" class="text-center py-5">
+      <div class="spinner-border text-danger" role="status"></div>
+    </div>
+
+    <!-- ERRORE -->
+    <div *ngIf="errore && !caricamento" class="alert alert-danger">{{ errore }}</div>
+
+    <!-- CONTENUTO PROFILO -->
+    <ng-container *ngIf="!caricamento && !errore">
+
+      <!-- ===== CARD PROFILO ===== -->
+      <div class="card profilo-card mb-4">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h4 class="mb-0">Il mio profilo</h4>
+          <span class="badge" [ngClass]="isAdmin ? 'bg-danger' : 'bg-success'">
+            {{ nomeRuolo }}
+          </span>
+        </div>
+
+        <div class="card-body">
+          <div class="row">
+
+            <!-- Avatar / icona utente -->
+            <div class="col-md-2 text-center mb-3 mb-md-0">
+              <div class="avatar-circle">
+                <span class="avatar-initials">
+                  {{ (contatto?.nome ?? auth.nome ?? '?')[0] | uppercase }}
+                </span>
+              </div>
+            </div>
+
+            <!-- Dati personali -->
+            <div class="col-md-7">
+              <table class="table table-dark table-borderless dati-table">
+                <tbody>
+                  <tr>
+                    <th>Nome completo</th>
+                    <td>{{ contatto?.nomeCompleto ?? auth.nome ?? '—' }}</td>
+                  </tr>
+                  <tr *ngIf="isAdmin && contatto?.codiceFiscale">
+                    <th>Codice fiscale</th>
+                    <td>{{ contatto?.codiceFiscale }}</td>
+                  </tr>
+                  <tr *ngIf="contatto?.dataNascita">
+                    <th>Data di nascita</th>
+                    <td>{{ contatto?.dataNascita | date:'dd/MM/yyyy' }}</td>
+                  </tr>
+                  <tr *ngIf="contatto?.cittaNascita">
+                    <th>Città di nascita</th>
+                    <td>{{ contatto?.cittaNascita }}</td>
+                  </tr>
+                  <tr>
+                    <th>Ruolo</th>
+                    <td>
+                      <span class="badge" [ngClass]="isAdmin ? 'bg-danger' : 'bg-primary'">
+                        {{ nomeRuolo }}
+                      </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Stato account</th>
+                    <td>
+                      <span class="badge" [ngClass]="auth.idStato === 1 ? 'bg-success' : 'bg-warning text-dark'">
+                        {{ nomeStato }}
+                      </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Scadenza sessione</th>
+                    <td>
+                      <span *ngIf="tokenExp; else noExp">
+                        {{ tokenExp | date:'dd/MM/yyyy HH:mm' }}
+                      </span>
+                      <ng-template #noExp><span class="text-muted">—</span></ng-template>
+                    </td>
+                  </tr>
+                  <tr *ngIf="auth.scadenzaPsw">
+                    <th>Scadenza password</th>
+                    <td>{{ auth.scadenzaPsw! * 1000 | date:'dd/MM/yyyy' }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Azioni -->
+            <div class="col-md-3 d-flex flex-column gap-2 justify-content-start pt-2">
+              <button class="btn btn-outline-warning btn-sm" (click)="apriModifica(tplModifica)">
+                ✎ Modifica dati
+              </button>
+              <a routerLink="/profilo/password" class="btn btn-outline-secondary btn-sm" *ngIf="false">
+                🔒 Modifica password
+              </a>
+            </div>
+
+          </div><!-- /row -->
+        </div><!-- /card-body -->
+
+      </div><!-- /card profilo -->
+
+      <!-- ===== DASHBOARD ADMIN ===== -->
+      <div *ngIf="isAdmin" class="card profilo-card">
+        <div class="card-header">
+          <h5 class="mb-0">👥 Gestione Utenti</h5>
+        </div>
+
+        <div class="card-body p-0">
+
+          <!-- Notifica a scomparsa (4 s) mostrata dopo crea/modifica/elimina utente -->
+          <div *ngIf="notificaDashboard" class="alert m-3 py-2"
+            [ngClass]="notificaDashboardTipo === 'success' ? 'alert-success' : 'alert-danger'"
+            role="alert">
+            {{ notificaDashboard }}
+          </div>
+
+          <!-- Caricamento utenti -->
+          <div *ngIf="caricamentoUtenti" class="text-center py-4">
+            <div class="spinner-border text-danger spinner-border-sm" role="status"></div>
+          </div>
+
+          <!-- Errore utenti -->
+          <div *ngIf="erroreUtenti" class="alert alert-danger m-3">{{ erroreUtenti }}</div>
+
+          <!-- Tabella utenti -->
+          <div *ngIf="!caricamentoUtenti && !erroreUtenti" class="table-responsive">
+            <table class="table table-dark table-hover table-striped mb-0 utenti-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Nome</th>
+                  <th>Cognome</th>
+                  <th>Email</th>
+                  <th>Stato</th>
+                  <th class="text-end">Azioni</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let u of utenti">
+                  <td class="text-muted">{{ u.idContatto }}</td>
+                  <td>{{ u.nome ?? '—' }}</td>
+                  <td>{{ u.cognome ?? '—' }}</td>
+                  <td class="text-muted small">{{ u.email ?? '—' }}</td>
+                  <td>
+                    <span class="badge"
+                      [ngClass]="u.idContattoStato === 1 ? 'bg-success' : 'bg-secondary'">
+                      {{ u.idContattoStato === 1 ? 'Attivo' : 'Sospeso' }}
+                    </span>
+                  </td>
+                  <td class="text-end">
+                    <button class="btn btn-sm btn-outline-warning me-1"
+                      (click)="apriModificaAdmin(u, tplModificaAdmin)">✎</button>
+                    <button class="btn btn-sm btn-outline-danger"
+                      (click)="apriElimina(u, tplElimina)">🗑</button>
+                  </td>
+                </tr>
+                <tr *ngIf="utenti.length === 0">
+                  <td colspan="6" class="text-center text-muted py-3">Nessun utente trovato.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div><!-- /card-body -->
+      </div><!-- /dashboard admin -->
+
+    </ng-container>
+  </div><!-- /container -->
+</div><!-- /profilo-page -->
+
+
+<!-- ===== MODAL: MODIFICA DATI PERSONALI ===== -->
+<ng-template #tplModifica>
+  <div class="modal-header">
+    <h5 class="modal-title">✎ Modifica dati personali</h5>
+    <button type="button" class="btn-close btn-close-white" (click)="modalModificaRef?.dismiss()"></button>
+  </div>
+  <div class="modal-body">
+    <div *ngIf="formModificaSuccesso" class="alert alert-success py-2">{{ formModificaSuccesso }}</div>
+    <div *ngIf="formModificaErrore" class="alert alert-danger py-2">{{ formModificaErrore }}</div>
+    <form [formGroup]="formModifica">
+
+      <!-- Dati base -->
+      <div class="mb-3">
+        <label class="form-label">Nome</label>
+        <input class="form-control form-control-dark" formControlName="nome" type="text">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Cognome</label>
+        <input class="form-control form-control-dark" formControlName="cognome" type="text">
+      </div>
+
+      <hr class="border-secondary my-3">
+
+      <!-- Sezione cambio password: opzionale, lasciare vuoto per non modificarla -->
+      <!-- Regole identiche alla registrazione: min 8 car., 1 maiuscola, 1 carattere speciale -->
+      <!-- L'errore appare solo dopo che l'utente ha interagito con il campo (touched) -->
+      <p class="text-muted small mb-2">Lascia vuoto per non cambiare la password.</p>
+      <div class="mb-2">
+        <label class="form-label">Password attuale</label>
+        <input class="form-control form-control-dark" formControlName="passwordAttuale" type="password"
+          placeholder="Richiesta solo se cambi la password">
+      </div>
+      <!-- Password con validazione visiva: bordo rosso + messaggio quando non rispetta le regole -->
+      <div class="mb-3">
+        <label class="form-label">Nuova password</label>
+        <input class="form-control form-control-dark" formControlName="nuovaPassword" type="password"
+          placeholder="Nuova password"
+          [class.is-invalid]="formModifica.get('nuovaPassword')?.invalid && formModifica.get('nuovaPassword')?.touched">
+        <div class="invalid-feedback d-block"
+          *ngIf="formModifica.get('nuovaPassword')?.invalid && formModifica.get('nuovaPassword')?.touched">
+          La password deve avere almeno 8 caratteri, una lettera maiuscola e un carattere speciale (es. !@#$%).
+        </div>
+      </div>
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary btn-sm" (click)="modalModificaRef?.dismiss()">Annulla</button>
+    <button class="btn btn-warning btn-sm"
+      [disabled]="formModifica.get('nome')?.invalid || formModifica.get('cognome')?.invalid || formModificaCaricamento"
+      (click)="salvaModifica()">
+      <span *ngIf="formModificaCaricamento" class="spinner-border spinner-border-sm me-1"></span>
+      Salva
+    </button>
+  </div>
+</ng-template>
+
+
+
+
+
+<!-- ===== MODAL: MODIFICA UTENTE (ADMIN) ===== -->
+<ng-template #tplModificaAdmin>
+  <div class="modal-header">
+    <h5 class="modal-title">✎ Modifica — {{ utenteSelezionato?.nomeCompleto }}</h5>
+    <button type="button" class="btn-close btn-close-white" (click)="modalModificaAdminRef?.dismiss()"></button>
+  </div>
+  <div class="modal-body">
+    <div *ngIf="formModificaAdminErrore" class="alert alert-danger py-2">{{ formModificaAdminErrore }}</div>
+    <form [formGroup]="formModificaAdmin">
+      <div class="row g-2 mb-2">
+        <div class="col-6">
+          <label class="form-label">Nome</label>
+          <input class="form-control form-control-dark" formControlName="nome" type="text">
+        </div>
+        <div class="col-6">
+          <label class="form-label">Cognome</label>
+          <input class="form-control form-control-dark" formControlName="cognome" type="text">
+        </div>
+      </div>
+      <div class="mb-2">
+        <label class="form-label">Stato account</label>
+        <select class="form-select form-select-dark" formControlName="idContattoStato">
+          <option [value]="1">Attivo</option>
+          <option [value]="2">Sospeso</option>
+        </select>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary btn-sm" (click)="modalModificaAdminRef?.dismiss()">Annulla</button>
+    <button class="btn btn-warning btn-sm"
+      [disabled]="formModificaAdmin.invalid || formModificaAdminCaricamento"
+      (click)="salvaModificaAdmin()">
+      <span *ngIf="formModificaAdminCaricamento" class="spinner-border spinner-border-sm me-1"></span>
+      Salva
+    </button>
+  </div>
+</ng-template>
+
+
+<!-- ===== MODAL: ELIMINA UTENTE (ADMIN) ===== -->
+<ng-template #tplElimina>
+  <div class="modal-header">
+    <h5 class="modal-title text-danger">⚠ Elimina utente</h5>
+    <button type="button" class="btn-close btn-close-white" (click)="modalEliminaRef?.dismiss()"></button>
+  </div>
+  <div class="modal-body">
+    Sei sicuro di voler eliminare <strong>{{ utenteSelezionato?.nomeCompleto }}</strong>?
+    <br><small class="text-muted">Questa operazione non può essere annullata.</small>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary btn-sm" (click)="modalEliminaRef?.dismiss()">Annulla</button>
+    <button class="btn btn-danger btn-sm"
+      [disabled]="eliminaCaricamento"
+      (click)="confermaElimina()">
+      <span *ngIf="eliminaCaricamento" class="spinner-border spinner-border-sm me-1"></span>
+      Elimina
+    </button>
+  </div>
+</ng-template>

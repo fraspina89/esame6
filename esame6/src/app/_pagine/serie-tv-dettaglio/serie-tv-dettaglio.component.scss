@@ -1,0 +1,483 @@
+﻿// ===== VARIABILI =====
+
+$colore-accento:    #e87c25;                   // arancione principale (Netflix-like)
+$colore-pericolo:   #e50914;                   // rosso per episodi e azioni prominenti
+$colore-successo:   #28a745;                   // verde badge "file selezionato"
+$sfondo-host:       #0b0b0d;                   // sfondo dell'intera pagina
+$sfondo-form:       #1e1e22;                   // sfondo input/card in tema dark
+$sfondo-form-focus: #26262c;                   // sfondo input al focus
+$sfondo-stagione:   #1f1f1f;                   // sfondo header accordion stagione
+$sfondo-episodi:    #181818;                   // sfondo corpo lista episodi
+$testo-chiaro:      #e9ecef;                   // testo principale chiaro
+$testo-muted:       #adb5bd;                   // testo secondario / badge video
+$bordo-scuro:       rgba(255, 255, 255, 0.15); // bordi sottili su sfondo scuro
+
+
+// ===== MIXIN =====
+
+// Pulsante trasparente con bordo colorato; al hover si riempie col colore del bordo.
+@mixin btn-bordo($colore) {
+  background: transparent;
+  color: $colore;
+  border: 1px solid $colore;
+  border-radius: .3rem;
+  padding: .55rem 1.2rem;
+  font-size: .95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color .2s, color .2s;
+
+  &:hover {
+    background: $colore;
+    color: #000;
+  }
+}
+
+
+// ===== HOST =====
+
+:host {
+  display: block;
+  background-color: $sfondo-host;
+  color: $testo-chiaro;
+  min-height: 100vh;
+}
+
+
+// ===== HERO (immagine di sfondo + gradiente) =====
+
+// Immagine di sfondo a piena larghezza (locandina o carousel della serie)
+.detail-hero {
+  position: relative;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+// Immagine di sfondo coprente
+.detail-bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 55%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  z-index: 0;
+}
+
+// Gradiente da sinistra (nero pieno) verso destra (trasparente) per leggibilità testo
+.detail-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    #000 0%,
+    #000 35%,
+    rgba(0,0,0,.97) 45%,
+    rgba(0,0,0,.80) 55%,
+    rgba(0,0,0,.30) 65%,
+    transparent 75%
+  );
+  z-index: 1;
+}
+
+// Contenuto testo sovrapposto all'immagine (titolo, meta, pulsanti)
+.detail-content {
+  position: relative;
+  z-index: 2;
+  padding: 2.5rem 1.5rem;
+}
+
+// Titolo principale della serie TV
+.detail-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: .6rem;
+  line-height: 1.15;
+}
+
+// Meta-info in arancione (anni, stagioni, episodi)
+.detail-meta {
+  color: $colore-accento;
+  font-size: .95rem;
+  font-weight: 500;
+  margin-bottom: .8rem;
+}
+
+// Descrizione breve della serie
+.detail-desc {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  max-width: 440px;
+}
+
+// Tabella info (Regia, Cast, Genere) con etichette colorate
+.detail-info {
+  border-collapse: collapse;
+  margin-bottom: 1.4rem;
+
+  td {
+    padding: .15rem .6rem .15rem 0;
+    font-size: .88rem;
+    vertical-align: top;
+  }
+
+  .info-label {
+    color: $colore-accento;
+    white-space: nowrap;
+    padding-right: 1rem;
+  }
+
+  .info-value { color: rgba(255, 255, 255, 0.85); }
+}
+
+// Riga pulsanti azione (Riproduci, Modifica, Elimina)
+.detail-actions {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  flex-wrap: wrap;
+  margin-bottom: .75rem;
+
+  @media (max-width: 430px) {
+    flex-wrap: nowrap;
+    gap: .5rem;
+  }
+}
+
+// Pulsante "Riproduci"
+.btn-riproduci {
+  background: #e91e63;
+  color: #fff;
+  border: none;
+  border-radius: .3rem;
+  padding: .55rem 1.4rem;
+  font-size: .95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color .2s;
+
+  &:hover { background: #c2185b; }
+
+  @media (max-width: 430px) {
+    padding: .35rem .9rem;
+    font-size: .8rem;
+  }
+}
+
+// Pulsanti Modifica ed Elimina — bordo giallo/rosso, si riempie al hover
+.btn-modifica {
+  @include btn-bordo(#ffc107);
+
+  @media (max-width: 430px) { padding: .35rem .9rem; font-size: .8rem; }
+}
+.btn-elimina {
+  @include btn-bordo(#dc3545);
+
+  @media (max-width: 430px) { padding: .35rem .9rem; font-size: .8rem; }
+}
+
+// Testo piccolo "Termini di utilizzo" sotto i pulsanti
+.detail-terms {
+  font-size: .78rem;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0;
+}
+
+.terms-link {
+  color: $colore-accento;
+
+  &:hover { color: #ff9d4d; }
+}
+
+
+// ===== VIDEO PRINCIPALE =====
+
+// Wrapper nero che contiene il player video della serie
+.detail-video-wrap {
+  background: #000;
+  padding: 1.5rem 0;
+}
+
+// Video a larghezza piena, altezza massima limitata
+.detail-video {
+  width: 100%;
+  max-height: 500px;
+  display: block;
+  border-radius: .3rem;
+}
+
+
+// ===== SECTION TITLE (titolo sezione con bordo rosso a sinistra) =====
+
+.section-title {
+  margin: 2.5rem 0 1rem;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: $testo-chiaro;
+  border-left: 4px solid $colore-pericolo;
+  padding-left: 0.75rem;
+}
+
+
+// ===== STAGIONI & EPISODI =====
+
+// Pannello accordion per ciascuna stagione
+.stagione-panel {
+  border: 1px solid #333;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+}
+
+// Intestazione stagione (pulsante che apre/chiude la lista episodi)
+.stagione-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  background: $sfondo-stagione;
+  border: none;
+  color: #fff;
+  padding: 0.85rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.2s;
+
+  &:hover,
+  &.open { background: #2a2a2a; }
+
+  // Numero episodi in grigio accanto al titolo stagione
+  .ep-count {
+    font-weight: 400;
+    font-size: 0.85rem;
+    color: #999;
+  }
+
+  // Freccia su/giù all'estremità destra
+  .chevron { margin-left: auto; }
+}
+
+// Contenitore lista episodi (visibile se la stagione è aperta)
+.episodi-list {
+  background: $sfondo-episodi;
+}
+
+// Wrapper singolo episodio con effetto hover sulla riga
+.episodio-wrap {
+  border-top: 1px solid #2a2a2a;
+
+  &:hover > .episodio-row { background: $sfondo-stagione; }
+}
+
+// Riga singolo episodio: [cerchio numero] [info] [durata] [pulsante]
+.episodio-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0.85rem 1.2rem;
+
+  // Cerchio rosso con il numero dell'episodio
+  .ep-numero {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: $colore-pericolo;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
+  // Area testuale: titolo e descrizione breve
+  .ep-info {
+    flex: 1;
+
+    .ep-titolo { font-weight: 600; margin: 0; }
+    .ep-desc   { font-size: 0.85rem; margin: 0.2rem 0 0; color: #aaa; }
+  }
+
+  // Durata in minuti, allineata a destra
+  .ep-durata {
+    flex-shrink: 0;
+    font-size: 0.8rem;
+    color: #999;
+  }
+}
+
+// Pulsante "Riproduci" per episodio singolo (visibile solo agli Admin)
+.btn-riproduci-ep {
+  flex-shrink: 0;
+  background: $colore-pericolo;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.3rem 0.9rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  align-self: center;
+
+  &:hover { background: #b00710; }
+}
+
+// Player video in-linea per l'episodio (collassato di default, si apre al click)
+.ep-video-wrap {
+  padding: 0 1.2rem 1rem;
+  background: $sfondo-episodi;
+
+  .ep-video {
+    width: 100%;
+    max-height: 360px;
+    border-radius: 4px;
+    display: block;
+  }
+}
+
+
+// ===== MODAL MODIFICA SERIE TV (NgBootstrap) =====
+// I campi form all'interno usano Bootstrap (form-control, form-floating, form-select, btn).
+// Le classi seguenti servono esclusivamente per il tema dark.
+
+// Sfondo e struttura del contenuto modal
+.modal-dark-custom {
+  background: #141416;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: .6rem;
+  color: $testo-chiaro;
+}
+
+// Override tema dark per input/select/textarea Bootstrap
+// Usa !important per battere la specificità delle regole Bootstrap
+.form-ctrl-dark {
+  background-color: $sfondo-form !important;
+  color: $testo-chiaro !important;
+  border-color: $bordo-scuro !important;
+
+  &:focus {
+    background-color: $sfondo-form-focus !important;
+    border-color: $colore-accento !important;
+    box-shadow: 0 0 0 0.2rem rgba(232, 124, 37, 0.25) !important;
+    color: #fff !important;
+  }
+
+  // Sfondo degli option nel dropdown select
+  option { background: $sfondo-form; }
+}
+
+// Floating label: grigia a riposo, arancione quando il campo è attivo o compilato
+.form-floating {
+  > .form-ctrl-dark ~ label {
+    color: #6c757d !important;
+  }
+
+  > .form-ctrl-dark:focus ~ label,
+  > .form-ctrl-dark:not(:placeholder-shown) ~ label {
+    color: $colore-accento !important;
+  }
+}
+
+// Separatore di sezione nel form (es. "INFORMAZIONI", "MEDIA")
+.section-divider-label {
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: $colore-accento;
+  margin-bottom: .75rem;
+  padding-bottom: .35rem;
+  border-bottom: 1px solid rgba(232, 124, 37, 0.25);
+}
+
+// Card cliccabile per la selezione di un file media (locandina / carousel / video).
+.media-upload-card {
+  position: relative;
+  background: $sfondo-form;
+  border: 1.5px dashed $bordo-scuro;
+  border-radius: .5rem;
+  overflow: hidden;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: border-color .2s;
+
+  // Bordo arancione al passaggio del mouse
+  &:hover { border-color: $colore-accento; }
+
+  // Variante orizzontale, più bassa: usata per il campo video
+  &--wide {
+    flex-direction: row;
+    gap: 1rem;
+    min-height: 72px;
+    padding: 0 1.5rem;
+    justify-content: flex-start;
+  }
+}
+
+// Immagine esistente mostrata in semitrasparenza come sfondo della card
+.media-thumb {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: .35;
+}
+
+// Badge verde in alto a destra: "Nuova selezionata" / "Nuovo selezionato"
+.media-new-badge {
+  position: absolute;
+  top: .4rem;
+  right: .4rem;
+  background: $colore-successo;
+  color: #fff;
+  font-size: .65rem;
+  font-weight: 700;
+  padding: .15rem .4rem;
+  border-radius: .25rem;
+  z-index: 2;
+}
+
+// Testo "▶ Video presente" (mostrato se il video esiste già e non ne è stato scelto uno nuovo)
+.video-badge {
+  font-size: .78rem;
+  color: $testo-muted;
+  margin-right: .5rem;
+}
+
+// Etichetta cliccabile che racchiude l'<input type="file"> nascosto
+.media-upload-label {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  padding: .75rem 1rem;
+  gap: .2rem;
+}
+
+// Icona emoji grande (🖼 / 🎞 / 🎬)
+.upload-icon { font-size: 1.5rem; }
+
+// Testo descrittivo del tipo di file e peso massimo consentito
+.upload-text {
+  font-size: .82rem;
+  font-weight: 600;
+  color: #ccc;
+}
+

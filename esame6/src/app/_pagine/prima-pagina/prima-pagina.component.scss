@@ -1,0 +1,172 @@
+// ===================================================
+// PrimaPaginaComponent — stile
+// Pagina iniziale (home): hero a piena altezza, sezione
+// di registrazione rapida e griglia card con anteprima video.
+// Il @media è già annidato dentro .card-registrazione.
+// ===================================================
+
+
+// ===== VARIABILI =====
+
+$sfondo-card:   rgba(0, 0, 0, 0.85);       // sfondo semi-trasparente card (prima definizione)
+$sfondo-card2:  #000;                       // sfondo pieno card (seconda definizione / override)
+$bordo-card:    rgba(255, 255, 255, 0.06);  // bordo sottile su sfondo scuro
+$sfondo-input:  rgba(255, 255, 255, 0.04);  // sfondo campi input
+$sfondo-input2: #1f2123;                    // sfondo campi input (seconda card)
+$bp-sm:         576px;                      // breakpoint mobile
+
+
+// Sezione hero: immagine di sfondo con overlay scuro, altezza piena schermo
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3.5rem 1rem 2rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: calc(100vh - 140px);
+}
+
+// Logo Netflix inline nei testi (rimpicciolito con filter brightness)
+.label-logo {
+  height: 20px;
+  width: auto;
+  vertical-align: middle;
+  margin-left: 0.4rem;
+  filter: brightness(1.6);
+}
+
+// Card di accesso/registrazione rapida (prima definizione: sfondo semi-trasparente)
+.card-registrazione {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+  width: 100%;
+  background: $sfondo-card;
+  color: #fff;
+  border-radius: 0.75rem;
+  border: 1px solid $bordo-card;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+  overflow: visible;
+  margin: 0 auto;
+  min-height: 220px;
+
+  .card-body { padding: 0.9rem; }
+
+  .card-title {
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.25rem;
+    .line1 { display: block; font-size: 1.4rem; line-height: 1.05; }
+    .line2 { display: block; font-size: 1.15rem; font-weight: 700; margin-top: 0.25rem; }
+  }
+
+  // Linee verticali decorative ai lati della card
+  &::before, &::after {
+    content: "";
+    position: absolute;
+    top: 12px;
+    bottom: 12px;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 1;
+  }
+  &::before { left: -18px; }
+  &::after  { right: -18px; }
+
+  // Su mobile le linee decorative vengono nascoste per mancanza di spazio
+  @media (max-width: $bp-sm) {
+    &::before, &::after { display: none; }
+  }
+
+  .form-control {
+    background: $sfondo-input;
+    color: #fff;
+    border: 1px solid $bordo-card;
+    border-radius: .5rem;
+    box-shadow: none;
+    &::placeholder { color: rgba(255, 255, 255, 0.6); }
+    &:focus {
+      border-color: var(--bs-danger);
+      box-shadow: 0 0 0 0.15rem rgba(139, 0, 0, 0.12);
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+    }
+  }
+
+  .input-group {
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+    .btn { padding: .375rem .6rem; }
+  }
+}
+
+// Card di registrazione (seconda definizione: sfondo nero pieno, override della prima)
+.card-registrazione {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+  width: 100%;
+  background: $sfondo-card2;
+  color: #fff;
+  border-radius: 0.75rem;
+  border: 1px solid $bordo-card;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+  overflow: visible;
+  margin: 0 auto;
+  min-height: 180px;
+
+  .card-title {
+    color: #fff;
+    font-weight: 600;
+    .line1 { display: block; font-size: 1.4rem; line-height: 1.05; }
+    .line2 { display: block; font-size: 1.15rem; font-weight: 700; margin-top: 0.25rem; }
+  }
+
+  .form-control {
+    background-color: $sfondo-input2;
+    color: #fff;
+    border: none;
+    box-shadow: none;
+    font-size: 0.95rem;
+
+    &::placeholder { color: rgba(255, 255, 255, 0.6); }
+    &:focus { background-color: #222426; color: #fff; box-shadow: none; }
+  }
+
+  .form-check-label { color: #ddd; }
+}
+
+// Titolo delle sezioni di contenuto
+.section-title {
+  color: #fff;
+  margin-bottom: 1.5rem;
+}
+
+// Card con anteprima video al hover (carosello home)
+.card-hover {
+  background: #111;
+  border: none;
+  border-radius: 0.5rem;
+  overflow: hidden;
+
+  .media-wrap {
+    position: relative;
+    overflow: hidden;
+
+    img.thumb {
+      width: 100%;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+  }
+
+  &:hover .thumb {
+    transform: scale(1.05);
+  }
+}
+

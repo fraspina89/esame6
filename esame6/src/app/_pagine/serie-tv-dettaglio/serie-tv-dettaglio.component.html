@@ -1,0 +1,316 @@
+<!-- Indicatore di caricamento Bootstrap (visibile finché i dati non arrivano dal server) -->
+<div *ngIf="caricamento" class="text-center py-5">
+  <div class="spinner-border text-danger" role="status">
+    <span class="visually-hidden">Caricamento...</span>
+  </div>
+</div>
+
+<!-- Messaggio di errore se la serie non viene trovata o l'API restituisce un errore -->
+<div *ngIf="errore" class="container py-4">
+  <div class="alert alert-danger">{{ errore }}</div>
+</div>
+
+<!-- Contenuto principale della pagina (visibile solo dopo il caricamento senza errori) -->
+<main *ngIf="!caricamento && serie">
+
+  <!-- ===== HERO ===== -->
+  <section class="detail-hero">
+    <img [src]="serie.locandina || serie.carousel || imgFallback" [alt]="serie.nome" class="detail-bg" />
+    <div class="detail-overlay"></div>
+
+    <div class="container detail-content">
+      <span class="badge bg-danger mb-3">{{ serie.categoria?.nome }}</span>
+      <h1 class="detail-title">{{ serie.nome }}</h1>
+
+      <p class="detail-meta">
+        <span *ngIf="serie.annoInizio">{{ serie.annoInizio }}</span>
+        <span *ngIf="serie.annoFine"> – {{ serie.annoFine }}</span>
+        <span *ngIf="!serie.annoFine && serie.is_in_corso"> – in corso</span>
+        <span *ngIf="serie.totaleStagioni">
+          &nbsp;&nbsp;{{ serie.totaleStagioni }} stagion{{ serie.totaleStagioni === 1 ? 'e' : 'i' }}
+        </span>
+        <span>
+          &nbsp;&nbsp;{{ serie.episodi_count ?? serie.episodi?.length ?? 0 }} episodi
+        </span>
+      </p>
+
+      <p class="detail-desc" *ngIf="serie.descrizione">{{ serie.descrizione }}</p>
+
+      <table class="detail-info" *ngIf="serie.regista || serie.attori || serie.categoria">
+        <tr *ngIf="serie.regista">
+          <td class="info-label">Regia</td>
+          <td class="info-value">{{ serie.regista }}</td>
+        </tr>
+        <tr *ngIf="serie.attori">
+          <td class="info-label">Cast</td>
+          <td class="info-value">{{ serie.attori }}</td>
+        </tr>
+        <tr *ngIf="serie.categoria">
+          <td class="info-label">Genere</td>
+          <td class="info-value">{{ serie.categoria.nome }}</td>
+        </tr>
+      </table>
+
+      <div class="detail-actions">
+        <button class="btn-riproduci" *ngIf="serie.video" (click)="toggleVideo()">
+          &#9654; {{ videoAperto ? 'Chiudi' : 'Riproduci' }}
+        </button>
+        <button class="btn-modifica" *ngIf="auth.idRuolo === 1" (click)="apriModifica(modalModificaSerie)">
+          &#9998; Modifica
+        </button>
+        <button class="btn-elimina" *ngIf="auth.idRuolo === 1" (click)="apriElimina(modalConfermaElimina)">
+          &#128465; Elimina
+        </button>
+      </div>
+
+      <p class="detail-terms" *ngIf="serie.video">
+        Facendo click su Riproduci accetti i nostri
+        <a href="#" class="terms-link" (click)="$event.preventDefault()">Termini di utilizzo</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== VIDEO PRINCIPALE (si apre al click su "Riproduci") ===== -->
+  <div class="detail-video-wrap" *ngIf="serie.video && videoAperto">
+    <div class="container">
+      <video [src]="serie.video" controls class="detail-video"></video>
+    </div>
+  </div>
+
+  <!-- Sezione stagioni: visibile solo se la serie ha episodi caricati -->
+  <section class="container py-4" *ngIf="stagionNumbers.length > 0">
+    <h2 class="section-title mb-3">Stagioni &amp; Episodi</h2>
+
+    <div class="stagioni">
+      <div class="stagione-panel" *ngFor="let n of stagionNumbers">
+
+        <!-- Header stagione (accordion) -->
+        <button class="stagione-header" (click)="apriStagione(n)"
+                [class.open]="stagioneAperta === n">
+          <span>Stagione {{ n }}</span>
+          <span class="ep-count">({{ episodiStagione(n).length }} episodi)</span>
+          <span class="chevron">{{ stagioneAperta === n ? '▲' : '▼' }}</span>
+        </button>
+
+        <!-- Lista episodi -->
+        <div class="episodi-list" *ngIf="stagioneAperta === n">
+          <div class="episodio-wrap" *ngFor="let ep of episodiStagione(n)">
+
+            <div class="episodio-row">
+              <div class="ep-numero">{{ ep.numeroEpisodio }}</div>
+              <div class="ep-info">
+                <p class="ep-titolo">{{ ep.titolo }}</p>
+                <p class="ep-desc" *ngIf="ep.descrizione">{{ ep.descrizione }}</p>
+              </div>
+              <div class="ep-durata" *ngIf="ep.durata">{{ ep.durata }} min</div>
+
+        <!-- Pulsante "Riproduci episodio" visibile solo agli Admin se l'episodio ha un video -->
+              <button
+                *ngIf="auth.idRuolo === 1 && ep.idFilmato"
+                class="btn-riproduci-ep"
+                (click)="$event.stopPropagation(); toggleVideoEpisodio(ep.idEpisodio)">
+                {{ videoApertoEpisodio === ep.idEpisodio ? '⏹ Chiudi' : '▶ Riproduci' }}
+              </button>
+            </div>
+
+            <!-- Video player episodio (solo admin) -->
+            <div class="ep-video-wrap" *ngIf="auth.idRuolo === 1 && ep.idFilmato && videoApertoEpisodio === ep.idEpisodio">
+              <video [src]="ep.idFilmato" controls autoplay playsinline class="ep-video"></video>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== MODAL MODIFICA SERIE ===== -->
+<ng-template #modalModificaSerie let-modal>
+  <div class="modal-content modal-dark-custom">
+
+    <!-- Header -->
+    <div class="modal-header border-bottom border-secondary px-4 pt-4 pb-3">
+      <div>
+        <h5 class="modal-title fw-bold text-white mb-0">&#9998; Modifica Serie TV</h5>
+        <small class="text-warning">{{ serie?.nome }}</small>
+      </div>
+      <button type="button" class="btn-close btn-close-white" (click)="modal.dismiss()"></button>
+    </div>
+
+    <!-- Body scrollable -->
+    <div class="modal-body px-4 py-3" style="max-height:70vh; overflow-y:auto">
+      <div *ngIf="formErrore"    class="alert alert-danger border-0 rounded-3 py-2 mb-3">{{ formErrore }}</div>
+      <div *ngIf="formMessaggio" class="alert alert-success border-0 rounded-3 py-2 mb-3">{{ formMessaggio }}</div>
+
+      <form>
+        <!-- ── SEZIONE INFO ── -->
+        <p class="section-divider-label">Informazioni</p>
+
+        <!-- Nome -->
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control form-ctrl-dark" id="fNome"
+                 placeholder="Nome" [(ngModel)]="formNome" name="nome" required>
+          <label for="fNome" class="text-secondary">Nome <span class="text-danger">*</span></label>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <!-- Categoria -->
+          <div class="col-md-6">
+            <div class="form-floating">
+              <select class="form-select form-ctrl-dark" id="fCategoria"
+                      [(ngModel)]="formIdCategoria" name="idCategoria">
+                <option [value]="0" disabled>Seleziona…</option>
+                <option *ngFor="let c of categorie" [value]="c.idCategoria">{{ c.nome }}</option>
+              </select>
+              <label for="fCategoria" class="text-secondary">Categoria <span class="text-danger">*</span></label>
+            </div>
+          </div>
+          <!-- N. Stagioni -->
+          <div class="col-md-3">
+            <div class="form-floating">
+              <input type="number" class="form-control form-ctrl-dark" id="fStagioni"
+                     placeholder="Stagioni" [(ngModel)]="formTotaleStagioni" name="totaleStagioni" min="1">
+              <label for="fStagioni" class="text-secondary">N. Stagioni</label>
+            </div>
+          </div>
+          <!-- Anno inizio -->
+          <div class="col-md-3">
+            <div class="form-floating">
+              <input type="number" class="form-control form-ctrl-dark" id="fAnnoI"
+                     placeholder="Anno inizio" [(ngModel)]="formAnnoInizio" name="annoInizio" min="1900" max="2099">
+              <label for="fAnnoI" class="text-secondary">Anno inizio</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <!-- Regista -->
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input type="text" class="form-control form-ctrl-dark" id="fRegista"
+                     placeholder="Regista" [(ngModel)]="formRegista" name="regista" maxlength="45">
+              <label for="fRegista" class="text-secondary">Regista</label>
+            </div>
+          </div>
+          <!-- Attori -->
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input type="text" class="form-control form-ctrl-dark" id="fAttori"
+                     placeholder="Attori" [(ngModel)]="formAttori" name="attori" maxlength="45">
+              <label for="fAttori" class="text-secondary">Attori <small class="text-muted">(max 45 car.)</small></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <!-- Anno fine -->
+          <div class="col-md-3">
+            <div class="form-floating">
+              <input type="number" class="form-control form-ctrl-dark" id="fAnnoF"
+                     placeholder="Anno fine" [(ngModel)]="formAnnoFine" name="annoFine" min="1900" max="2099">
+              <label for="fAnnoF" class="text-secondary">Anno fine <small class="text-muted">(opz.)</small></label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Descrizione -->
+        <div class="form-floating mb-4">
+          <textarea class="form-control form-ctrl-dark" id="fDesc"
+                    placeholder="Descrizione" style="height:100px"
+                    [(ngModel)]="formDescrizione" name="descrizione"></textarea>
+          <label for="fDesc" class="text-secondary">Descrizione</label>
+        </div>
+
+        <!-- ── SEZIONE MEDIA ── -->
+        <p class="section-divider-label">Media</p>
+
+        <div class="row g-3">
+          <!-- Locandina -->
+          <div class="col-md-6">
+            <div class="media-upload-card">
+              <img *ngIf="serie?.locandina && !formLocandina"
+                   [src]="serie!.locandina" class="media-thumb" alt="Locandina attuale">
+              <div *ngIf="formLocandina" class="media-new-badge">Nuova selezionata</div>
+              <label class="media-upload-label">
+                <span class="upload-icon">🖼</span>
+                <span class="upload-text">Locandina</span>
+                <small class="text-muted d-block">jpg/png · max 5MB</small>
+                <input type="file" class="d-none" accept="image/*"
+                       (change)="onFileChange($event, 'locandina')">
+              </label>
+            </div>
+          </div>
+
+          <!-- Carousel -->
+          <div class="col-md-6">
+            <div class="media-upload-card">
+              <img *ngIf="serie?.carousel && !formCarousel"
+                   [src]="serie!.carousel" class="media-thumb" alt="Carousel attuale">
+              <div *ngIf="formCarousel" class="media-new-badge">Nuova selezionata</div>
+              <label class="media-upload-label">
+                <span class="upload-icon">🎞</span>
+                <span class="upload-text">Immagine Carousel</span>
+                <small class="text-muted d-block">jpg/png · max 5MB</small>
+                <input type="file" class="d-none" accept="image/*"
+                       (change)="onFileChange($event, 'carousel')">
+              </label>
+            </div>
+          </div>
+
+          <!-- Video -->
+          <div class="col-12">
+            <div class="media-upload-card media-upload-card--wide">
+              <span *ngIf="serie?.video && !formVideo" class="video-badge">
+                ▶ Video presente
+              </span>
+              <div *ngIf="formVideo" class="media-new-badge">Nuovo selezionato</div>
+              <label class="media-upload-label">
+                <span class="upload-icon">🎬</span>
+                <span class="upload-text">Video</span>
+                <small class="text-muted d-block">mp4/webm · max 200MB · lascia vuoto per mantenere</small>
+                <input type="file" class="d-none" accept="video/mp4,video/webm,video/avi,video/mov"
+                       (change)="onFileChange($event, 'video')">
+              </label>
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- Footer -->
+    <div class="modal-footer border-top border-secondary px-4 py-3">
+      <button class="btn btn-outline-secondary" (click)="modal.dismiss()" [disabled]="formCaricamento">
+        Annulla
+      </button>
+      <button class="btn btn-warning text-dark fw-semibold px-4" (click)="salvaModifica()"
+              [disabled]="formCaricamento || !formNome.trim()">
+        <span *ngIf="formCaricamento" class="spinner-border spinner-border-sm me-2"></span>
+        <span *ngIf="!formCaricamento">&#10004;</span> Salva Modifiche
+      </button>
+    </div>
+
+  </div>
+</ng-template>
+
+<!-- ===== MODAL CONFERMA ELIMINA ===== -->
+<ng-template #modalConfermaElimina let-modal>
+  <div class="modal-content modal-dark-custom">
+    <div class="modal-header border-0 pb-0">
+      <h5 class="modal-title fw-bold text-danger">&#9888; Elimina Serie TV</h5>
+      <button type="button" class="btn-close btn-close-white" (click)="modal.dismiss()"></button>
+    </div>
+    <div class="modal-body pt-2">
+      <p class="mb-1">Sei sicuro di voler eliminare <strong class="text-warning">{{ serie?.nome }}</strong>?</p>
+      <small class="text-secondary">Questa operazione non può essere annullata.</small>
+    </div>
+    <div class="modal-footer border-0">
+      <button class="btn btn-outline-secondary" (click)="modal.dismiss()">Annulla</button>
+      <button class="btn btn-danger" (click)="confermaElimina()">&#128465; Elimina</button>
+    </div>
+  </div>
+</ng-template>
+

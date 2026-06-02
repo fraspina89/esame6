@@ -1,0 +1,172 @@
+// Pagina profilo — coerente con il tema scuro del progetto
+.profilo-page {
+  min-height: calc(100vh - 120px);
+  background-color: #0b0b0d;
+  color: #e9ecef;
+}
+
+// Card principale
+.profilo-card {
+  background-color: #1a1a1d;
+  border: 1px solid #2c2c2f;
+  border-radius: .5rem;
+
+  .card-header {
+    background-color: #111113;
+    border-bottom: 1px solid #2c2c2f;
+    color: #e9ecef;
+    padding: .85rem 1.25rem;
+
+    h4, h5 { color: #fff; }
+  }
+
+  .card-footer {
+    background-color: #111113;
+    border-top: 1px solid #2c2c2f;
+    padding: .6rem 1.25rem;
+  }
+}
+
+// Avatar circolare con iniziali
+.avatar-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #dc3545, #6610f2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+
+  .avatar-initials {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+  }
+}
+
+// Tabella dati personali
+.dati-table {
+  color: #e9ecef;
+  margin-bottom: 0;
+
+  th {
+    color: #dc3545;
+    font-weight: 600;
+    width: 40%;
+    padding: .4rem .5rem;
+    font-size: .9rem;
+  }
+
+  td {
+    padding: .4rem .5rem;
+    font-size: .9rem;
+  }
+}
+
+// Tabella gestione utenti
+.utenti-table {
+  font-size: .875rem;
+
+  thead th {
+    background-color: #111113;
+    color: #dc3545;
+    border-color: #2c2c2f;
+    padding: .65rem 1rem;
+  }
+
+  tbody td {
+    border-color: #2c2c2f;
+    vertical-align: middle;
+    padding: .55rem 1rem;
+  }
+}
+
+// Form controls scuri (stile coerente con il resto del progetto)
+.form-control-dark {
+  background-color: #2c2c2f;
+  border: 1px solid #444;
+  color: #e9ecef;
+
+  &:focus {
+    background-color: #3a3a3d;
+    border-color: #dc3545;
+    color: #e9ecef;
+    box-shadow: 0 0 0 .2rem rgba(220, 53, 69, .25);
+  }
+
+  &::placeholder { color: #888; }
+}
+
+.form-select-dark {
+  background-color: #2c2c2f;
+  border: 1px solid #444;
+  color: #e9ecef;
+
+  &:focus {
+    background-color: #3a3a3d;
+    border-color: #dc3545;
+    color: #e9ecef;
+    box-shadow: 0 0 0 .2rem rgba(220, 53, 69, .25);
+  }
+}
+
+// Stile scuro per le finestre modali 
+:host ::ng-deep {
+  .modal-content {
+    background-color: #1a1a1d;
+    border: 1px solid #2c2c2f;
+    color: #e9ecef;
+  }
+  .modal-header {
+    border-bottom: 1px solid #2c2c2f;
+    background-color: #111113;
+  }
+  .modal-footer {
+    border-top: 1px solid #2c2c2f;
+    background-color: #111113;
+  }
+  .modal-title { color: #fff; }
+
+  // Su schermi ≤430px riduce margini e padding del modal per non sprecare spazio
+  @media (max-width: 430px) {
+    .modal-dialog { margin: .25rem; }
+    .modal-body { padding: .65rem .75rem; }
+    .modal-header, .modal-footer { padding: .45rem .75rem; }
+    .modal-title { font-size: 1rem; }
+  }
+}
+
+// ─── Responsive ≤430px ───────────────────────────────────────────────────────
+// Compatta header, tabella e campi form per schermi piccoli 
+@media (max-width: 430px) {
+  .profilo-card {
+    .card-header {
+      padding: .6rem .8rem;
+      h4, h5 { font-size: .88rem; }
+      .btn { font-size: .78rem; padding: .28rem .55rem; }
+    }
+  }
+
+  .utenti-table {
+    font-size: .78rem;
+    thead th, tbody td { padding: .35rem .45rem; }
+  }
+
+  .form-control-dark,
+  .form-select-dark {
+    padding: .35rem .55rem;
+    font-size: .875rem;
+  }
+}
+
+// ─── Responsive ≤380px ───────────────────────────────────────────────────────
+// Riduce ulteriormente font e padding del bottone mantenendo titolo e
+// bottone sulla stessa riga 
+@media (max-width: 380px) {
+  .profilo-card .card-header {
+    h4, h5 { font-size: .82rem; }
+    .btn { font-size: .72rem; padding: .22rem .42rem; white-space: nowrap; }
+  }
+}

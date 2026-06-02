@@ -1,0 +1,106 @@
+<!-- ===== HEADER CATEGORIA ===== -->
+<section class="categoria-header">
+  <div class="container py-4">
+    <button class="btn btn-sm btn-outline-secondary text-light mb-3" type="button" (click)="tornaAlCatalogo()">
+      ← Torna al catalogo
+    </button>
+    <h2 class="section-title mb-0">
+      <span class="text-danger">{{ categoria?.nome ?? 'Categoria' }}</span>
+    </h2>
+  </div>
+</section>
+
+<!-- ===== STATO CARICAMENTO ===== -->
+<div *ngIf="caricamento" class="text-center py-5">
+  <div class="spinner-border text-danger" role="status">
+    <span class="visually-hidden">Caricamento...</span>
+  </div>
+</div>
+
+<!-- ===== ERRORE ===== -->
+<div *ngIf="errore" class="container py-4">
+  <div class="alert alert-danger">{{ errore }}</div>
+</div>
+
+<main *ngIf="!caricamento && !errore">
+  <div class="container pb-5">
+
+    <!-- ===== SEZIONE FILM ===== -->
+    <h3 class="section-title mb-3">Film</h3>
+
+    <div *ngIf="film.length === 0" class="text-muted py-2">
+      Nessun film trovato per questa categoria.
+    </div>
+
+    <div *ngIf="film.length > 0" class="slide-wrap">
+      <button class="slide-arrow slide-arrow-prev" [class.invisible]="!hasPrev()" (click)="slidePrev()" aria-label="Precedente">&#10094;</button>
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-3 flex-grow-1">
+        <div class="col" *ngFor="let f of filmVisibili()">
+          <div class="card card-hover"
+            (mouseenter)="onHoverEnter(f, $event)"
+            (mouseleave)="onHoverLeave(f, $event)"
+            style="cursor:pointer">
+            <div class="media-wrap">
+              <img [src]="f.locandina || imgFallback" class="thumb" [alt]="f.titolo">
+              <video class="card-video" muted playsinline preload="none" [attr.data-src]="f.video"></video>
+            </div>
+            <div class="card-body p-2">
+              <p class="small fw-semibold text-truncate mb-1 text-light">{{ f.titolo }} ({{ f.anno }})</p>
+              <div class="hover-panel" [class.show]="hoveredFilmId === f.idFilm">
+                <p class="small text-light mt-1 mb-2">{{ f.descrizione | slice:0:120 }}</p>
+                <button class="btn btn-sm btn-outline-light w-100"
+                  (click)="$event.stopPropagation(); vaiAlFilm(f.idFilm)">
+                  Vai alla scheda
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="slide-arrow slide-arrow-next" [class.invisible]="!hasNext()" (click)="slideNext()" aria-label="Successivo">&#10095;</button>
+    </div>
+
+    <!-- ===== SEZIONE SERIE TV ===== -->
+    <h3 class="section-title mt-5 mb-3">Serie TV</h3>
+
+    <div *ngIf="serie.length === 0" class="text-muted py-2">
+      Nessuna serie TV trovata per questa categoria.
+    </div>
+
+    <div *ngIf="serie.length > 0" class="slide-wrap">
+      <button class="slide-arrow slide-arrow-prev" [class.invisible]="!hasPrevSerie()" (click)="slidePrevSerie()" aria-label="Precedente">&#10094;</button>
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-3 flex-grow-1">
+        <div class="col" *ngFor="let s of serieVisibili()">
+          <div class="card card-hover"
+            (mouseenter)="onHoverEnterSerie(s, $event)"
+            (mouseleave)="onHoverLeaveSerie(s, $event)"
+            style="cursor:pointer">
+            <div class="media-wrap">
+              <img [src]="s.locandina || imgFallback" class="thumb" [alt]="s.nome">
+              <video class="card-video" muted playsinline preload="none" [attr.data-src]="s.video"></video>
+            </div>
+            <div class="card-body p-2">
+              <p class="small fw-semibold text-truncate mb-1 text-light">{{ s.nome }}</p>
+              <p class="small text-muted mb-1">
+                {{ s.annoInizio }}<span *ngIf="s.annoFine"> – {{ s.annoFine }}</span>
+                · {{ s.totaleStagioni }} stagioni
+              </p>
+              <div class="hover-panel" [class.show]="hoveredSerieId === s.idSerie">
+                <button class="btn btn-sm btn-outline-light w-100"
+                  (click)="$event.stopPropagation(); vaiAllaSerieTV(s.idSerie)">
+                  Guarda
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="slide-arrow slide-arrow-next" [class.invisible]="!hasNextSerie()" (click)="slideNextSerie()" aria-label="Successivo">&#10095;</button>
+    </div>
+
+  </div>
+</main>

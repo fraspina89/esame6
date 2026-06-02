@@ -1,0 +1,48 @@
+<?php
+
+namespace App\Http\Resources\Api\V1;
+
+use Illuminate\Http\Resources\Json\ResourceCollection;
+
+class ComuneItalianoCollection extends ResourceCollection
+{
+    /**
+     * The resource that this resource collects.
+     *
+     * @var string
+     */
+    public $collects = ComuneItalianoResource::class;
+
+    /**
+     * Transform the resource collection into an array.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    public function toArray($request)
+    {
+        return [
+            'data' => $this->collection,
+            'meta' => [
+                'count' => $this->collection->count(),
+                'attivi' => $this->collection->where('attivo', true)->count(),
+                'regioni' => $this->collection->pluck('regione')->unique()->values(),
+                'province' => $this->collection->pluck('provincia')->unique()->values(),
+                'statistiche_geografiche' => [
+                    'nord' => $this->collection->filter(function($item) {
+                        return $item->isNord();
+                    })->count(),
+                    'centro' => $this->collection->filter(function($item) {
+                        return $item->isCentro();
+                    })->count(),
+                    'sud' => $this->collection->filter(function($item) {
+                        return $item->isSud();
+                    })->count(),
+                    'isole' => $this->collection->filter(function($item) {
+                        return $item->isIsole();
+                    })->count(),
+                ]
+            ]
+        ];
+    }
+}

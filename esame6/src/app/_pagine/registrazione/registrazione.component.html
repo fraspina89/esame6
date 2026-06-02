@@ -1,0 +1,271 @@
+<main class="hero d-flex align-items-center">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <div class="card card-registrazione mx-auto" style="max-width:720px;">
+          <div class="card-body p-4">
+            <h3 class="card-title text-center mb-3">
+              <span class="line1"><span class="text-danger">REGISTRATI</span> e inizia</span>
+              <span class="line2">a <span class="text-danger">USARE</span> la piattaforma</span>
+            </h3>
+
+            <form [formGroup]="form" (ngSubmit)="submit()" novalidate *ngIf="!msg || msg.startsWith('Errore')">
+              <div class="mb-3 text-center">
+                <p class="form-label d-block text-center mb-2">Inserisci qui i tuoi dati ed iscriviti</p>
+              </div>
+
+              <div class="row g-3">
+                <!-- Colonna sinistra: dati anagrafici -->
+                <div class="col-12 col-md-6">
+                  <div class="mb-2 field-with-star">
+                    <label for="nome" class="form-label visually-hidden">Nome</label>
+                    <input id="nome" type="text" class="form-control" placeholder="Nome *" formControlName="nome" [class.is-invalid]="isInvalid('nome')">
+                    <div class="invalid-feedback" *ngIf="form.get('nome')?.invalid && (form.get('nome')?.touched || submitted)">Il nome è obbligatorio.</div>
+                  </div>
+
+                  <div class="mb-2 field-with-star">
+                    <label for="cognome" class="form-label visually-hidden">Cognome</label>
+                    <input id="cognome" type="text" class="form-control" placeholder="Cognome *" formControlName="cognome" [class.is-invalid]="isInvalid('cognome')">
+                    <div class="invalid-feedback" *ngIf="form.get('cognome')?.invalid && (form.get('cognome')?.touched || submitted)">Il cognome è obbligatorio.</div>
+                  </div>
+
+                  <div class="mb-2 field-with-star">
+                    <label class="form-label visually-hidden">Sesso</label>
+
+                    <div ngbDropdown class="d-block">
+                      <div class="form-control dropdown-toggle text-start" ngbDropdownToggle role="button" tabindex="0" [class.is-invalid]="isInvalid('sesso')"
+                        [class.filled]="selectedGenderLabel">
+                        {{ selectedGenderLabel || 'Sesso *' }}
+                      </div>
+
+                      <div ngbDropdownMenu class="w-100">
+                        <button class="dropdown-item" type="button" *ngFor="let g of genderOptions" (click)="selectGender(g.value, g.label)">{{ g.label }}</button>
+                      </div>
+                    </div>
+
+                    <div class="invalid-feedback d-block" *ngIf="form.get('sesso')?.invalid && (form.get('sesso')?.touched || submitted)">Seleziona il sesso.</div>
+                  </div>
+
+                  <!-- Uso solo il dropdown personalizzato per il sesso (rimosso il select nativo) -->
+
+                  <div class="mb-2 field-with-star">
+                    <label class="form-label visually-hidden">Data di nascita</label>
+                    <div ngbDropdown #ddDate="ngbDropdown" class="d-block">
+                      <div class="form-control dropdown-toggle text-start" ngbDropdownToggle role="button" tabindex="0" [class.is-invalid]="isInvalid('dataNascita')"
+                        [class.filled]="selectedGiorno && selectedMese && selectedAnno">
+                        {{ selectedDateLabel }}
+                      </div>
+
+                      <div ngbDropdownMenu class="p-3" style="min-width:260px;">
+                        <div class="row g-1 mb-2">
+                          <div class="col-4">
+                            <select class="form-select form-select-sm" [(ngModel)]="selectedGiorno" [ngModelOptions]="{standalone:true}" (ngModelChange)="onDatePartChange(ddDate)">
+                              <option [ngValue]="null" disabled>GG</option>
+                              <option *ngFor="let g of giorni" [ngValue]="g">{{ g }}</option>
+                            </select>
+                          </div>
+                          <div class="col-4">
+                            <select class="form-select form-select-sm" [(ngModel)]="selectedMese" [ngModelOptions]="{standalone:true}" (ngModelChange)="onDatePartChange(ddDate)">
+                              <option [ngValue]="null" disabled>Mese</option>
+                              <option *ngFor="let m of mesi" [ngValue]="m.num">{{ m.nome }}</option>
+                            </select>
+                          </div>
+                          <div class="col-4">
+                            <select class="form-select form-select-sm" [(ngModel)]="selectedAnno" [ngModelOptions]="{standalone:true}" (ngModelChange)="onDatePartChange(ddDate)">
+                              <option [ngValue]="null" disabled>AAAA</option>
+                              <option *ngFor="let a of anni" [ngValue]="a">{{ a }}</option>
+                            </select>
+                          </div>
+                        </div>
+                        <!-- selezione automatica: i select chiamano onDatePartChange(ddDate) e chiudono il menu -->
+                      </div>
+                    </div>
+                    <div class="invalid-feedback d-block" *ngIf="isInvalid('dataNascita')">La data di nascita è obbligatoria.</div>
+                  </div>
+
+                  <div class="row g-2 mb-2">
+                    <div class="col-12 col-md-9">
+                      <label for="cittaNascita" class="form-label visually-hidden">Città di nascita</label>
+                      <div class="field-with-star">
+                        <input id="cittaNascita" type="text" class="form-control" placeholder="Città di nascita *"
+                        formControlName="cittaNascita"
+                        [ngbTypeahead]="searchCitta"
+                        [resultFormatter]="formatterCitta"
+                        [inputFormatter]="formatterCitta"
+                        (selectItem)="onSelectCitta($event)"
+                        [editable]="true"
+                        autocomplete="off"
+                        [class.is-invalid]="isInvalid('cittaNascita')">
+                        <div class="invalid-feedback" *ngIf="form.get('cittaNascita')?.invalid && (form.get('cittaNascita')?.touched || submitted)">Inserisci la città di nascita.</div>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                      <label for="provinciaNascita" class="form-label visually-hidden">Prov.</label>
+                      <div class="field-with-star">
+                        <input id="provinciaNascita" type="text" class="form-control" placeholder="Prov. *" formControlName="provinciaNascita" [class.is-invalid]="isInvalid('provinciaNascita')">
+                        <div class="invalid-feedback" *ngIf="form.get('provinciaNascita')?.invalid && (form.get('provinciaNascita')?.touched || submitted)">Inserisci la provincia.</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="mb-2 field-with-star">
+                    <label for="codiceFiscale" class="form-label visually-hidden">Codice Fiscale</label>
+                    <input id="codiceFiscale" type="text" class="form-control" placeholder="Codice Fiscale *" formControlName="codiceFiscale" readonly [class.is-invalid]="isInvalid('codiceFiscale')">
+                    <div class="invalid-feedback" *ngIf="form.get('codiceFiscale')?.invalid && (form.get('codiceFiscale')?.touched || submitted)">Il codice fiscale è obbligatorio.</div>
+                  </div>
+
+                  <div class="mb-2 field-with-star">
+                    <label for="nazionalita" class="form-label visually-hidden">Nazionalità</label>
+                    <input id="nazionalita" type="text" class="form-control" placeholder="Nazionalità *"
+                      formControlName="nazionalita"
+                      [ngbTypeahead]="searchNazione"
+                      [resultFormatter]="formatterNazione"
+                      [inputFormatter]="formatterNazione"
+                      (selectItem)="onSelectNazione($event)"
+                      [editable]="true"
+                      autocomplete="off"
+                      [class.is-invalid]="isInvalid('nazionalita')">
+                    <div class="invalid-feedback" *ngIf="form.get('nazionalita')?.invalid && (form.get('nazionalita')?.touched || submitted)">La nazionalità è obbligatoria.</div>
+                  </div>
+
+                  <div class="mb-2 field-with-star">
+                    <label for="cittadinanza" class="form-label visually-hidden">Cittadinanza</label>
+                    <input id="cittadinanza" type="text" class="form-control" placeholder="Cittadinanza *" formControlName="cittadinanza" [class.is-invalid]="isInvalid('cittadinanza')">
+                    <div class="invalid-feedback" *ngIf="form.get('cittadinanza')?.invalid && (form.get('cittadinanza')?.touched || submitted)">La cittadinanza è obbligatoria.</div>
+                  </div>
+                </div>
+
+                <!-- Colonna destra: residenza + password + termini -->
+                <div class="col-12 col-md-6">
+                  <div class="mb-2 field-with-star">
+                    <label for="email" class="form-label visually-hidden">Email</label>
+                    <input id="email" type="email" class="form-control" placeholder="Email *" formControlName="email" [class.is-invalid]="isInvalid('email')">
+                    <div class="invalid-feedback" *ngIf="form.get('email')?.invalid && (form.get('email')?.touched || submitted)">Inserisci una email valida.</div>
+                  </div>
+
+                  <div class="mb-2">
+                    <label for="telefono" class="form-label visually-hidden">Telefono</label>
+                    <input id="telefono" type="tel" class="form-control" placeholder="Telefono" formControlName="telefono">
+                  </div>
+
+                  <div formGroupName="indirizzo">
+                    <div class="mb-2 row g-2">
+                      <div class="col-8">
+                        <label for="street" class="form-label visually-hidden">Via / Indirizzo</label>
+                        <input id="street" type="text" class="form-control" placeholder="Via / Indirizzo *" formControlName="street" [class.is-invalid]="isInvalid('indirizzo.street')">
+                        <div class="invalid-feedback" *ngIf="isInvalid('indirizzo.street')">Inserisci la via / indirizzo.</div>
+                      </div>
+                      <div class="col-4">
+                        <label for="civico" class="form-label visually-hidden">Civico</label>
+                        <input id="civico" type="text" class="form-control no-validation-icon" placeholder="N° *" formControlName="civico" [class.is-invalid]="isInvalid('indirizzo.civico')">
+                        <div class="invalid-feedback" *ngIf="isInvalid('indirizzo.civico')">Obbligatorio.</div>
+                      </div>
+                    </div>
+
+                    <div class="row g-2 mb-2">
+                      <div class="col-12">
+                        <label for="city" class="form-label visually-hidden">Città</label>
+                        <input id="city" type="text" class="form-control" placeholder="Città *"
+                          formControlName="city"
+                          [ngbTypeahead]="searchCittaIndirizzo"
+                          [resultFormatter]="formatterCittaIndirizzo"
+                          [inputFormatter]="formatterCittaIndirizzo"
+                          (selectItem)="onSelectCittaIndirizzo($event)"
+                          [editable]="true"
+                          autocomplete="off"  [class.is-invalid]="isInvalid('indirizzo.city')">
+                          <div class="invalid-feedback" *ngIf="isInvalid('indirizzo.city')">Inserisci la città.</div>
+                      </div>
+                      <div class="col-6">
+                        <label for="zip" class="form-label visually-hidden">CAP</label>
+
+                        <!-- CAP singolo: semplice campo testo, niente freccia -->
+                        <ng-container *ngIf="capIndirizzoSuggeriti.length === 0">
+                          <input id="zip" type="text" class="form-control no-validation-icon"
+                            placeholder="CAP *"
+                            formControlName="zip"
+                            [class.is-invalid]="isInvalid('indirizzo.zip')">
+                        </ng-container>
+
+                        <!-- Range CAP (es. Torino): dropdown con lista -->
+                        <ng-container *ngIf="capIndirizzoSuggeriti.length > 0">
+                          <div ngbDropdown #ddCap="ngbDropdown" class="d-block">
+                            <div class="form-control dropdown-toggle text-start" ngbDropdownToggle role="button" tabindex="0"
+                              [class.is-invalid]="isInvalid('indirizzo.zip')"
+                              [class.filled]="selectedCap">
+                              {{ selectedCap || 'CAP *' }}
+                            </div>
+                            <div ngbDropdownMenu class="p-2" style="min-width:130px;">
+                              <select class="form-select form-select-sm" size="6"
+                                [(ngModel)]="selectedCap" [ngModelOptions]="{standalone:true}"
+                                (ngModelChange)="onCapChange(ddCap)">
+                                <option *ngFor="let c of capIndirizzoSuggeriti" [value]="c">{{ c }}</option>
+                              </select>
+                            </div>
+                          </div>
+                        </ng-container>
+
+                        <div class="invalid-feedback d-block" *ngIf="isInvalid('indirizzo.zip')">Inserisci il CAP.</div>
+                      </div>
+                      <div class="col-6">
+                        <label for="province" class="form-label visually-hidden">Prov.</label>
+                        <input id="province" type="text" class="form-control" placeholder="Prov." formControlName="province"  [class.is-invalid]="isInvalid('indirizzo.province')">
+                        <div class="invalid-feedback" *ngIf="isInvalid('indirizzo.province')">Inserisci la provincia.</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="mb-2 field-with-star">
+                    <label for="password" class="form-label visually-hidden">Password</label>
+                    <div class="input-group">
+                      <input id="password" type="password" class="form-control" placeholder="Password *" formControlName="password" [class.is-invalid]="isInvalid('password')">
+                      <button type="button" class="btn btn-outline-secondary" id="togglePwd" (click)="togglePwd()">Mostra</button>
+                    </div>
+                    <div class="invalid-feedback d-block" *ngIf="form.get('password')?.invalid && (form.get('password')?.touched || submitted)">La password deve avere almeno 8 caratteri, una lettera maiuscola e un carattere speciale (es. !@#$%).</div>
+                  </div>
+
+                  <div class="mb-2 field-with-star">
+                    <label for="confermaPassword" class="form-label visually-hidden">Conferma Password</label>
+                    <input id="confermaPassword" type="password" class="form-control" placeholder="Conferma Password *" formControlName="confermaPassword" [class.is-invalid]="isInvalid('confermaPassword')">
+                    <div class="invalid-feedback" *ngIf="form.get('confermaPassword')?.invalid && (form.get('confermaPassword')?.touched || submitted)">Le password non coincidono.</div>
+                  </div>
+
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="accettaTermini" formControlName="accettaTermini" [class.is-invalid]="isInvalid('accettaTermini')">
+                    <label class="form-check-label" for="accettaTermini">Accetto i termini e le condizioni&nbsp;<span class="text-danger">*</span></label>
+                    <div class="invalid-feedback">Devi accettare i termini.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2 mt-3">
+                <small class="text-muted text-center text-sm-start">I campi contrassegnati con * sono obbligatori.</small>
+                <button class="btn btn-danger mx-auto mx-sm-0" id="btnRegister" type="submit" [disabled]="busy">
+                  <span *ngIf="busy" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                  Registrati
+                </button>
+              </div>
+
+              <div *ngIf="msg && msg.startsWith('Errore')" class="alert alert-danger mt-3">{{ msg }}</div>
+            </form>
+
+            <!-- Messaggio post-registrazione -->
+            <div *ngIf="msg && !msg.startsWith('Errore')" class="text-center py-4">
+              <div class="alert alert-success">Avvenuta registrazione</div>
+            </div>
+
+            <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1080;">
+
+              <div id="registerSuccessToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                  <div class="toast-body">Registrazione completata con successo!</div>
+                  <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Chiudi"></button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

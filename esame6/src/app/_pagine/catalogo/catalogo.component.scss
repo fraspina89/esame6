@@ -1,0 +1,285 @@
+﻿
+// ===== VARIABILI =====
+
+$colore-accento:    #e87c25;                    // arancione principale 
+$colore-successo:   #28a745;                    // verde badge "file selezionato"
+$sfondo-host:       #0b0b0d;                    // sfondo dell'intera pagina
+$sfondo-card:       #111214;                    // sfondo card film/serie
+$sfondo-modal:      #141416;                    // sfondo del modal NgBootstrap
+$sfondo-form:       #1e1e22;                    // sfondo input/card in tema dark
+$sfondo-form-focus: #26262c;                    // sfondo input al focus
+$testo-chiaro:      #e9ecef;                    // testo principale chiaro
+$bordo-card:        rgba(255, 255, 255, 0.04);  // bordo sottile sulle card
+$bordo-scuro:       rgba(255, 255, 255, 0.15);  // bordo input su sfondo scuro
+
+// Breakpoint responsive (usati nei @media annidati)
+$bp-xl: 1200px;
+$bp-lg:  992px;
+$bp-md:  768px;
+
+
+// Pulsante trasparente con bordo colorato; al hover si riempie col colore del bordo.
+@mixin btn-bordo($colore) {
+  background: transparent;
+  color: $colore;
+  border: 1px solid $colore;
+  border-radius: .3rem;
+  padding: .55rem 1.2rem;
+  font-size: .95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color .2s, color .2s;
+
+  &:hover {
+    background: $colore;
+    color: #000;
+  }
+}
+
+// ===== CAROSELLO BOOTSTRAP (immagini in cima alla pagina) =====
+
+.carousel-wrap {
+  margin-top: 1rem;
+  padding: 0 6rem;
+  box-sizing: border-box;
+
+  .carousel         { border-radius: .5rem; overflow: hidden; }
+  .carousel-item    { height: 400px; }
+  .carousel-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  // Riduce il padding laterale su schermi più piccoli (annidato nel selettore)
+  @media (max-width: $bp-xl) { padding: 0 4rem; }
+
+  @media (max-width: $bp-lg) {
+    padding: 0 2.5rem;
+    .carousel-item { height: 300px; }
+  }
+
+  @media (max-width: $bp-md) {
+    padding: 0 .75rem;
+    .carousel-item { height: 220px; }
+  }
+}
+
+
+// ===== TITOLO DI SEZIONE (nome categoria sopra ogni slide) =====
+
+.section-title {
+  margin: 2rem 0 1rem;
+  padding-left: 1rem;
+  font-weight: 600;
+  color: $testo-chiaro;
+}
+
+
+// ===== SLIDE WRAP + FRECCE =====
+
+// Contenitore orizzontale con frecce laterali e lista card
+.slide-wrap {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+// Freccia di navigazione (precedente / successiva)
+.slide-arrow {
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, .08);
+  color: $testo-chiaro;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color .2s;
+
+  &:hover { background: rgba(255, 100, 100, .5); }
+
+  // Freccia nascosta quando non esiste slide precedente/successiva
+  &.invisible { visibility: hidden; pointer-events: none; }
+}
+
+
+// ===== CARD =====
+
+// Card film/serie TV: sfondo scuro, bordo sottile
+.card {
+  background: $sfondo-card;
+  border: 1px solid $bordo-card;
+  color: $testo-chiaro;
+  padding: 0;
+  overflow: visible;
+}
+
+// Card con effetto hover (scale) e swap thumb → video
+.card-hover {
+  position: relative;
+  transition: transform .22s ease, box-shadow .22s ease;
+  transform-origin: center top;
+
+  &:hover,
+  &.playing {
+    transform: scale(1.06);
+    z-index: 40;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, .45);
+  }
+
+  // Quando il video è pronto, nasconde il thumbnail e mostra il video
+  &.video-ready {
+    .thumb      { opacity: 0; }
+    .card-video { opacity: 1; }
+  }
+}
+
+// Wrapper immagine/video della card
+.media-wrap {
+  position: relative;
+  height: 160px;
+  overflow: hidden;
+
+  @media (max-width: $bp-md) { max-height: 140px; }
+}
+
+// Thumbnail dell'immagine di copertina
+.thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity .28s;
+
+  @media (max-width: $bp-md) { height: 140px; }
+}
+
+// Video in sovrimpressione (autoplay muted al hover)
+.card-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity .28s;
+  z-index: 1;
+}
+
+// Pannello descrizione che scende al hover sulla card
+.hover-panel {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height .35s ease;
+
+  &.show { max-height: 250px; }
+}
+
+
+// ===== MODAL AGGIUNGI FILM / SERIE TV (NgBootstrap) =====
+
+// Contenitore del modal in tema scuro (classe applicata su .modal-content)
+.modal-dark-custom {
+  background: $sfondo-modal;
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: .6rem;
+  color: $testo-chiaro;
+}
+
+// Override dark per input, select e textarea Bootstrap
+.form-ctrl-dark {
+  background-color: $sfondo-form !important;
+  color: $testo-chiaro !important;
+  border-color: $bordo-scuro !important;
+
+  &:focus {
+    background-color: $sfondo-form-focus !important;
+    border-color: $colore-accento !important;
+    box-shadow: 0 0 0 .2rem rgba(232, 124, 37, .25) !important;
+    color: #fff !important;
+  }
+
+  option { background: $sfondo-form; }
+}
+
+// Floating label: grigio a riposo, arancione a focus / compilato
+.form-floating {
+  > .form-ctrl-dark ~ label { color: #6c757d !important; }
+
+  > .form-ctrl-dark:focus ~ label,
+  > .form-ctrl-dark:not(:placeholder-shown) ~ label {
+    color: $colore-accento !important;
+  }
+}
+
+// Divisore visivo tra sezioni del form 
+.section-divider-label {
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: $colore-accento;
+  margin-bottom: .75rem;
+  padding-bottom: .35rem;
+  border-bottom: 1px solid rgba(232, 124, 37, .25);
+}
+
+// Card per upload file (locandina / carousel / video)
+.media-upload-card {
+  position: relative;
+  background: $sfondo-form;
+  border: 1.5px dashed $bordo-scuro;
+  border-radius: .5rem;
+  overflow: hidden;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: border-color .2s;
+
+  &:hover { border-color: $colore-accento; }
+
+  // Variante orizzontale per il video 
+  &--wide {
+    flex-direction: row;
+    gap: 1rem;
+    min-height: 72px;
+    padding: 0 1.5rem;
+    justify-content: flex-start;
+  }
+}
+
+// Badge verde "file selezionato" in alto a destra sulla card
+.media-new-badge {
+  position: absolute;
+  top: .4rem;
+  right: .4rem;
+  background: $colore-successo;
+  color: #fff;
+  font-size: .65rem;
+  font-weight: 700;
+  padding: .15rem .4rem;
+  border-radius: .25rem;
+  z-index: 2;
+}
+
+// Label cliccabile che apre il file picker
+.media-upload-label {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  padding: .75rem 1rem;
+  gap: .2rem;
+}
+
+.upload-icon { font-size: 1.5rem; }
+
+// Testo descrittivo dell'upload 
+.upload-text {
+  font-size: .82rem;
+  font-weight: 600;
+  color: #ccc;
+}
+

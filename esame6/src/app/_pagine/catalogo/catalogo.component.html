@@ -1,0 +1,507 @@
+<!-- ===== CAROSELLO IMMAGINI ===== -->
+<section class="carousel-wrap">
+  <div id="carousel_catalogo" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carousel_catalogo" data-bs-slide-to="0" class="active" aria-current="true"></button>
+      <button type="button" data-bs-target="#carousel_catalogo" data-bs-slide-to="1"></button>
+      <button type="button" data-bs-target="#carousel_catalogo" data-bs-slide-to="2"></button>
+      <button type="button" data-bs-target="#carousel_catalogo" data-bs-slide-to="3"></button>
+      <button type="button" data-bs-target="#carousel_catalogo" data-bs-slide-to="4"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active"><img [src]="carouselBase + '/comico.jpg'" class="d-block w-100" alt=""></div>
+      <div class="carousel-item"><img [src]="carouselBase + '/commedia.jpg'" class="d-block w-100" alt=""></div>
+      <div class="carousel-item"><img [src]="carouselBase + '/drammatico.jpg'" class="d-block w-100" alt=""></div>
+      <div class="carousel-item"><img [src]="carouselBase + '/horror.jpg'" class="d-block w-100" alt=""></div>
+      <div class="carousel-item"><img [src]="carouselBase + '/sfondo1.jpg'" class="d-block w-100" alt=""></div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carousel_catalogo" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Precedente</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carousel_catalogo" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Successivo</span>
+    </button>
+  </div>
+</section>
+
+<!-- Stato caricamento / errore -->
+<div *ngIf="caricamento" class="text-center py-5">
+  <div class="spinner-border text-danger" role="status">
+    <span class="visually-hidden">Caricamento...</span>
+  </div>
+</div>
+<div *ngIf="errore" class="container py-4">
+  <div class="alert alert-danger">{{ errore }}</div>
+</div>
+
+<!-- ===== RISULTATI RICERCA ===== -->
+<main *ngIf="!caricamento && ricercaAttiva">
+  <div class="container">
+    <h3 class="section-title">
+      <span class="text-danger">Risultati</span> per "{{ queryRicerca }}"
+      <button class="btn btn-sm btn-outline-secondary text-light ms-2" type="button" (click)="resetRicerca()">✕</button>
+    </h3>
+    <div *ngIf="risultatiRicerca.length === 0" class="text-muted py-3">Nessun film trovato.</div>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
+      <div class="col" *ngFor="let film of risultatiRicerca">
+        <div class="card card-hover" (mouseenter)="onHoverEnter(film, $event)" (mouseleave)="onHoverLeave(film, $event)" style="cursor:pointer">
+          <div class="media-wrap">
+            <img [src]="film.locandina || imgFallback" class="thumb" [alt]="film.titolo">
+            <video class="card-video" muted playsinline preload="none" [attr.data-src]="film.video"></video>
+          </div>
+          <div class="card-body p-2">
+            <p class="small fw-semibold text-truncate mb-1 text-light">{{ film.titolo }} ({{ film.anno }})</p>
+            <div class="hover-panel" [class.show]="hoveredFilmId === film.idFilm">
+              <p class="small text-light mt-1 mb-2">{{ film.descrizione | slice:0:120 }}</p>
+              <button class="btn btn-sm btn-outline-light w-100" (click)="$event.stopPropagation(); vaiAlFilm(film.idFilm)">Vai alla scheda</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ===== CATALOGO FILM PER CATEGORIE ===== -->
+<main *ngIf="!caricamento && !ricercaAttiva">
+  <div *ngFor="let cc of categorieConFilm" class="container mb-4" [id]="'categoria-' + cc.categoria.idCategoria">
+
+    <h3 class="section-title d-flex align-items-center gap-2">
+      <span class="text-danger">{{ cc.categoria.nome }}</span>
+      <button
+        *ngIf="auth.idRuolo === 1"
+        class="btn btn-sm btn-outline-warning ms-2"
+        (click)="apriModalAggiungi(modalAggiungiFilm, cc.categoria.idCategoria)">
+        + Aggiungi
+      </button>
+    </h3>
+
+    <!-- Slide wrapper -->
+    <div class="slide-wrap">
+      <button class="slide-arrow slide-arrow-prev" [class.invisible]="!hasPrev(cc)" (click)="slidePrev(cc)" aria-label="Precedente">&#10094;</button>
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3 flex-grow-1">
+        <div class="col" *ngFor="let film of filmVisibili(cc)">
+          <div class="card card-hover" (mouseenter)="onHoverEnter(film, $event)" (mouseleave)="onHoverLeave(film, $event)" style="cursor:pointer">
+            <div class="media-wrap">
+              <img [src]="film.locandina || imgFallback" class="thumb" [alt]="film.titolo">
+              <video class="card-video" muted playsinline preload="none" [attr.data-src]="film.video"></video>
+            </div>
+            <div class="card-body p-2">
+              <p class="small fw-semibold text-truncate mb-1 text-light">{{ film.titolo }} ({{ film.anno }})</p>
+              <div class="hover-panel" [class.show]="hoveredFilmId === film.idFilm">
+                <p class="small text-light mt-1 mb-2">{{ film.descrizione | slice:0:120 }}</p>
+                <button class="btn btn-sm btn-outline-light w-100" (click)="$event.stopPropagation(); vaiAlFilm(film.idFilm)">Vai alla scheda</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="slide-arrow slide-arrow-next" [class.invisible]="!hasNext(cc)" (click)="slideNext(cc)" aria-label="Successivo">&#10095;</button>
+    </div>
+
+  </div>
+</main>
+
+<!-- ===== CATALOGO SERIE TV PER CATEGORIE ===== -->
+<section *ngIf="!caricamento && !ricercaAttiva" class="mt-2">
+  <div class="container mb-3">
+    <h2 class="section-title">
+      <span class="text-white">Serie TV</span>
+    </h2>
+  </div>
+
+  <ng-container *ngFor="let cc of categorieConFilm">
+    <div *ngIf="cc.serie.length > 0" class="container mb-4">
+      <h3 class="section-title d-flex align-items-center gap-2">
+        <span class="text-white">{{ cc.categoria.nome }}</span>
+        <button
+          *ngIf="auth.idRuolo === 1"
+          class="btn btn-sm btn-outline-warning ms-2"
+          (click)="apriModalAggiungiSerie(modalAggiungiSerie, cc.categoria.idCategoria)">
+          + Aggiungi
+        </button>
+      </h3>
+      <div class="slide-wrap">
+        <button class="slide-arrow slide-arrow-prev" [class.invisible]="!hasPrevSerie(cc)" (click)="slidePrevSerie(cc)" aria-label="Precedente">&#10094;</button>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3 flex-grow-1">
+          <div class="col" *ngFor="let s of serieVisibili(cc)">
+            <div class="card card-hover" style="cursor:pointer"
+                 (mouseenter)="onHoverEnterSerie(s, $event)"
+                 (mouseleave)="onHoverLeaveSerie(s, $event)"
+                 (click)="vaiAllaSerieTV(s.idSerie)">
+              <div class="media-wrap">
+                <img [src]="s.locandina || imgFallback" class="thumb" [alt]="s.nome">
+                <video class="card-video" muted playsinline preload="none" [attr.data-src]="s.video"></video>
+              </div>
+              <div class="card-body p-2">
+                <p class="small fw-semibold text-truncate mb-1 text-light">{{ s.nome }}</p>
+                <p class="small mb-1" style="color:#999">{{ s.annoInizio }}<span *ngIf="s.annoFine"> – {{ s.annoFine }}</span> · {{ s.totaleStagioni }} stagioni</p>
+                <div class="hover-panel" [class.show]="hoveredSerieId === s.idSerie">
+                  <p class="small text-light mt-1 mb-2">{{ s.descrizione | slice:0:120 }}</p>
+                  <button class="btn btn-sm btn-outline-light w-100" (click)="$event.stopPropagation(); vaiAllaSerieTV(s.idSerie)">Guarda</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="slide-arrow slide-arrow-next" [class.invisible]="!hasNextSerie(cc)" (click)="slideNextSerie(cc)" aria-label="Successivo">&#10095;</button>
+      </div>
+    </div>
+  </ng-container>
+</section>
+
+<!-- ===== MODAL AGGIUNGI SERIE TV (solo Admin) ===== -->
+<ng-template #modalAggiungiSerie let-modal>
+  <div class="modal-content modal-dark-custom">
+
+    <!-- Header -->
+    <div class="modal-header border-bottom border-secondary px-4 pt-4 pb-3">
+      <div>
+        <h5 class="modal-title fw-bold text-white mb-0">+ Aggiungi Serie TV</h5>
+        <small class="text-warning">Nuova serie nel catalogo</small>
+      </div>
+      <button type="button" class="btn-close btn-close-white" (click)="modal.dismiss()"></button>
+    </div>
+
+    <!-- Body -->
+    <div class="modal-body px-4 py-3" style="max-height:70vh; overflow-y:auto">
+
+      <div *ngIf="serieFormErrore"    class="alert alert-danger border-0 rounded-3 py-2 mb-3">{{ serieFormErrore }}</div>
+      <div *ngIf="serieFormMessaggio" class="alert alert-success border-0 rounded-3 py-2 mb-3">{{ serieFormMessaggio }}</div>
+
+      <form>
+        <p class="section-divider-label">Informazioni</p>
+
+        <!-- Nome -->
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control form-ctrl-dark" id="saNome"
+                 placeholder="Nome" [(ngModel)]="serieFormNome" name="nome" required>
+          <label for="saNome" class="text-secondary">Nome <span class="text-danger">*</span></label>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <!-- Categoria -->
+          <div class="col-md-6">
+            <div class="form-floating">
+              <select class="form-select form-ctrl-dark" id="saCategoria"
+                      [(ngModel)]="serieFormIdCategoria" name="idCategoria" required>
+                <option [value]="0" disabled>Seleziona…</option>
+                <option *ngFor="let c of categorie" [value]="c.idCategoria">{{ c.nome }}</option>
+              </select>
+              <label for="saCategoria" class="text-secondary">Categoria <span class="text-danger">*</span></label>
+            </div>
+          </div>
+          <!-- Stagioni -->
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input type="number" class="form-control form-ctrl-dark" id="saStagioni"
+                     placeholder="Stagioni" [(ngModel)]="serieFormTotaleStagioni" name="totaleStagioni" min="1">
+              <label for="saStagioni" class="text-secondary">N. Stagioni</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <!-- Anno inizio -->
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input type="number" class="form-control form-ctrl-dark" id="saAnnoInizio"
+                     placeholder="Anno inizio" [(ngModel)]="serieFormAnnoInizio" name="annoInizio" min="1900" max="2099">
+              <label for="saAnnoInizio" class="text-secondary">Anno inizio</label>
+            </div>
+          </div>
+          <!-- Anno fine -->
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input type="number" class="form-control form-ctrl-dark" id="saAnnoFine"
+                     placeholder="Anno fine" [(ngModel)]="serieFormAnnoFine" name="annoFine" min="1900" max="2099">
+              <label for="saAnnoFine" class="text-secondary">Anno fine <small class="text-muted">(opz.)</small></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <!-- Regista -->
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input type="text" class="form-control form-ctrl-dark" id="saRegista"
+                     placeholder="Regista" [(ngModel)]="serieFormRegista" name="regista" maxlength="45">
+              <label for="saRegista" class="text-secondary">Regista</label>
+            </div>
+          </div>
+          <!-- Attori -->
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input type="text" class="form-control form-ctrl-dark" id="saAttori"
+                     placeholder="Attori" [(ngModel)]="serieFormAttori" name="attori" maxlength="45">
+              <label for="saAttori" class="text-secondary">Attori <small class="text-muted">(max 45 car.)</small></label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Descrizione -->
+        <div class="form-floating mb-3">
+          <textarea class="form-control form-ctrl-dark" id="saDesc"
+                    placeholder="Descrizione" style="height:100px"
+                    [(ngModel)]="serieFormDescrizione" name="descrizione"></textarea>
+          <label for="saDesc" class="text-secondary">Descrizione</label>
+        </div>
+
+        <!-- ── SEZIONE MEDIA ── -->
+        <p class="section-divider-label">Media</p>
+
+        <div class="row g-3">
+          <!-- Locandina -->
+          <div class="col-md-6">
+            <div class="media-upload-card">
+              <div *ngIf="serieFormLocandina" class="media-new-badge">Selezionata</div>
+              <label class="media-upload-label">
+                <span class="upload-icon">🖼</span>
+                <span class="upload-text">Locandina</span>
+                <small class="text-muted d-block">jpg/png · max 5MB</small>
+                <small class="text-secondary d-block">Default: elenco.jpg</small>
+                <input type="file" class="d-none" accept="image/*"
+                       (change)="onSerieFileChange($event, 'locandina')">
+              </label>
+            </div>
+          </div>
+          <!-- Carousel -->
+          <div class="col-md-6">
+            <div class="media-upload-card">
+              <div *ngIf="serieFormCarousel" class="media-new-badge">Selezionata</div>
+              <label class="media-upload-label">
+                <span class="upload-icon">🎞</span>
+                <span class="upload-text">Immagine Carousel</span>
+                <small class="text-muted d-block">jpg/png · max 5MB</small>
+                <small class="text-secondary d-block">Default: elenco.jpg</small>
+                <input type="file" class="d-none" accept="image/*"
+                       (change)="onSerieFileChange($event, 'carousel')">
+              </label>
+            </div>
+          </div>
+          <!-- Video -->
+          <div class="col-12">
+            <div class="media-upload-card media-upload-card--wide">
+              <div *ngIf="serieFormVideo" class="media-new-badge">Selezionato</div>
+              <label class="media-upload-label">
+                <span class="upload-icon">🎬</span>
+                <span class="upload-text">Video</span>
+                <small class="text-muted d-block">mp4/webm · max 200MB</small>
+                <small class="text-secondary d-block">Default: dark-night.mp4</small>
+                <input type="file" class="d-none" accept="video/mp4,video/webm,video/avi,video/mov"
+                       (change)="onSerieFileChange($event, 'video')">
+              </label>
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- Footer -->
+    <div class="modal-footer border-top border-secondary px-4 py-3">
+      <button class="btn btn-outline-secondary" (click)="modal.dismiss()" [disabled]="serieFormCaricamento">
+        Annulla
+      </button>
+      <button class="btn btn-warning text-dark fw-semibold px-4" (click)="salvaSerie()"
+              [disabled]="serieFormCaricamento || !serieFormNome.trim() || serieFormIdCategoria === 0">
+        <span *ngIf="serieFormCaricamento" class="spinner-border spinner-border-sm me-2"></span>
+        <span *ngIf="!serieFormCaricamento">✔</span> Salva Serie
+      </button>
+    </div>
+
+  </div>
+</ng-template>
+
+<!-- ===== MODAL TRAILER (NgbModal) ===== -->
+<ng-template #trailerModal let-modal>
+  <div class="modal-header border-0 pb-0">
+    <h5 class="modal-title">{{ filmSelezionato?.titolo }}</h5>
+    <button type="button" class="btn-close" aria-label="Chiudi" (click)="modal.dismiss()"></button>
+  </div>
+  <div class="modal-body p-0">
+    <div class="modal-media">
+      <video *ngIf="filmSelezionato?.video"
+        [src]="filmSelezionato!.video"
+        autoplay muted loop playsinline class="modal-video w-100">
+      </video>
+      <img *ngIf="!filmSelezionato?.video"
+        [src]="filmSelezionato?.locandina || imgFallback"
+        [alt]="filmSelezionato?.titolo || ''"
+        class="modal-img w-100" />
+    </div>
+    <div class="modal-info p-3">
+      <p class="modal-meta text-muted mb-1">
+        {{ filmSelezionato?.anno }}
+        <span *ngIf="filmSelezionato?.durata"> · {{ filmSelezionato!.durata }} min</span>
+        <span *ngIf="filmSelezionato?.categoria"> · {{ filmSelezionato!.categoria!.nome }}</span>
+      </p>
+      <p class="modal-desc" *ngIf="filmSelezionato?.descrizione">{{ filmSelezionato!.descrizione }}</p>
+      <p class="modal-regista" *ngIf="filmSelezionato?.regista"><small>Regia: {{ filmSelezionato!.regista }}</small></p>
+    </div>
+  </div>
+  <div class="modal-footer border-0 pt-0">
+    <button class="btn btn-danger" (click)="vaiAlFilm(filmSelezionato!.idFilm); modal.close()">&#9654; Riproduci</button>
+    <button class="btn btn-secondary" (click)="modal.dismiss()">Chiudi</button>
+  </div>
+</ng-template>
+
+<!-- ===== MODAL AGGIUNGI FILM (solo Admin) ===== -->
+<ng-template #modalAggiungiFilm let-modal>
+  <div class="modal-content modal-dark-custom">
+
+    <!-- Header -->
+    <div class="modal-header border-bottom border-secondary px-4 pt-4 pb-3">
+      <div>
+        <h5 class="modal-title fw-bold text-white mb-0">+ Aggiungi Film</h5>
+        <small class="text-warning">Nuovo film nel catalogo</small>
+      </div>
+      <button type="button" class="btn-close btn-close-white" (click)="modal.dismiss()"></button>
+    </div>
+
+    <!-- Body scrollable -->
+    <div class="modal-body px-4 py-3" style="max-height:70vh; overflow-y:auto">
+
+      <div *ngIf="formErrore"    class="alert alert-danger border-0 rounded-3 py-2 mb-3">{{ formErrore }}</div>
+      <div *ngIf="formMessaggio" class="alert alert-success border-0 rounded-3 py-2 mb-3">{{ formMessaggio }}</div>
+
+      <form>
+        <!-- ── SEZIONE INFO ── -->
+        <p class="section-divider-label">Informazioni</p>
+
+        <!-- Titolo (floating) -->
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control form-ctrl-dark" id="faTitolo"
+                 placeholder="Titolo" [(ngModel)]="formTitolo" name="titolo" required>
+          <label for="faTitolo" class="text-secondary">Titolo <span class="text-danger">*</span></label>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <!-- Categoria -->
+          <div class="col-md-6">
+            <div class="form-floating">
+              <select class="form-select form-ctrl-dark" id="faCategoria"
+                      [(ngModel)]="formIdCategoria" name="idCategoria" required>
+                <option [value]="0" disabled>Seleziona…</option>
+                <option *ngFor="let c of categorie" [value]="c.idCategoria">{{ c.nome }}</option>
+              </select>
+              <label for="faCategoria" class="text-secondary">Categoria <span class="text-danger">*</span></label>
+            </div>
+          </div>
+          <!-- Anno -->
+          <div class="col-md-3">
+            <div class="form-floating">
+              <input type="number" class="form-control form-ctrl-dark" id="faAnno"
+                     placeholder="Anno" [(ngModel)]="formAnno" name="anno" min="1900" max="2099" required>
+              <label for="faAnno" class="text-secondary">Anno <span class="text-danger">*</span></label>
+            </div>
+          </div>
+          <!-- Durata -->
+          <div class="col-md-3">
+            <div class="form-floating">
+              <input type="number" class="form-control form-ctrl-dark" id="faDurata"
+                     placeholder="Durata" [(ngModel)]="formDurata" name="durata" min="1" required>
+              <label for="faDurata" class="text-secondary">Durata (min) <span class="text-danger">*</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <!-- Regista -->
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input type="text" class="form-control form-ctrl-dark" id="faRegista"
+                     placeholder="Regista" [(ngModel)]="formRegista" name="regista" required>
+              <label for="faRegista" class="text-secondary">Regista <span class="text-danger">*</span></label>
+            </div>
+          </div>
+          <!-- Attori -->
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input type="text" class="form-control form-ctrl-dark" id="faAttori"
+                     placeholder="Attori" [(ngModel)]="formAttori" name="attori" required>
+              <label for="faAttori" class="text-secondary">Attori <span class="text-danger">*</span></label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Descrizione (floating textarea) -->
+        <div class="form-floating mb-4">
+          <textarea class="form-control form-ctrl-dark" id="faDesc"
+                    placeholder="Descrizione" style="height:100px"
+                    [(ngModel)]="formDescrizione" name="descrizione" required></textarea>
+          <label for="faDesc" class="text-secondary">Descrizione <span class="text-danger">*</span></label>
+        </div>
+
+        <!-- ── SEZIONE MEDIA ── -->
+        <p class="section-divider-label">Media</p>
+
+        <div class="row g-3">
+          <!-- Locandina -->
+          <div class="col-md-6">
+            <div class="media-upload-card">
+              <div *ngIf="formLocandina" class="media-new-badge">Selezionata</div>
+              <label class="media-upload-label">
+                <span class="upload-icon">🖼</span>
+                <span class="upload-text">Locandina</span>
+                <small class="text-muted d-block">jpg/png · max 5MB</small>
+                <small class="text-secondary d-block">Default: elenco.jpg</small>
+                <input type="file" class="d-none" accept="image/*"
+                       (change)="onFileChange($event, 'locandina')">
+              </label>
+            </div>
+          </div>
+
+          <!-- Carousel -->
+          <div class="col-md-6">
+            <div class="media-upload-card">
+              <div *ngIf="formCarousel" class="media-new-badge">Selezionata</div>
+              <label class="media-upload-label">
+                <span class="upload-icon">🎞</span>
+                <span class="upload-text">Immagine Carousel</span>
+                <small class="text-muted d-block">jpg/png · max 5MB</small>
+                <small class="text-secondary d-block">Default: elenco.jpg</small>
+                <input type="file" class="d-none" accept="image/*"
+                       (change)="onFileChange($event, 'carousel')">
+              </label>
+            </div>
+          </div>
+
+          <!-- Video -->
+          <div class="col-12">
+            <div class="media-upload-card media-upload-card--wide">
+              <div *ngIf="formVideo" class="media-new-badge">Selezionato</div>
+              <label class="media-upload-label">
+                <span class="upload-icon">🎬</span>
+                <span class="upload-text">Video</span>
+                <small class="text-muted d-block">mp4/webm · max 200MB</small>
+                <small class="text-secondary d-block">Default: inception.mp4</small>
+                <input type="file" class="d-none" accept="video/mp4,video/webm,video/avi,video/mov"
+                       (change)="onFileChange($event, 'video')">
+              </label>
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- Footer -->
+    <div class="modal-footer border-top border-secondary px-4 py-3">
+      <button class="btn btn-outline-secondary" (click)="modal.dismiss()" [disabled]="formCaricamento">
+        Annulla
+      </button>
+      <button class="btn btn-warning text-dark fw-semibold px-4" (click)="salvaFilm()"
+              [disabled]="formCaricamento || !formTitolo.trim() || formIdCategoria === 0 || !formDescrizione.trim() || !formAnno || !formDurata || !formRegista.trim() || !formAttori.trim()">
+        <span *ngIf="formCaricamento" class="spinner-border spinner-border-sm me-2"></span>
+        <span *ngIf="!formCaricamento">✔</span> Salva Film
+      </button>
+    </div>
+
+  </div>
+</ng-template>
+

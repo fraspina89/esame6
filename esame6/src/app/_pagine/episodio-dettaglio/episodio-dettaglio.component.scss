@@ -1,0 +1,221 @@
+﻿
+// ===== VARIABILI =====
+
+$colore-pericolo: #e50914;  // rosso Netflix (Riproduci / Elimina)
+$colore-modifica: #ffc107;  // giallo per pulsante modifica
+$sfondo-host:     #141414;  // sfondo pagina 
+$sfondo-modal:    #1a1a1a;  // sfondo modal NgBootstrap
+$sfondo-form:     #2a2a2a;  // sfondo input dark nel modal
+$testo-chiaro:    #fff;     // testo principale bianco
+$testo-muted:     #aaa;     // testo secondario / breadcrumb
+$bordo-form:      #444;     // bordo input dark
+
+
+// ===== MIXIN =====
+
+// Pulsante trasparente con bordo colorato; al hover mostra un riempimento semi-trasparente.
+@mixin btn-outline-soft($colore) {
+  background: transparent;
+  color: $colore;
+  border: 2px solid $colore;
+  border-radius: 4px;
+  padding: 0.5rem 1.2rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color .2s;
+
+  &:hover { background: rgba($colore, .15); }
+}
+
+
+// ===== HOST =====
+
+:host {
+  display: block;
+  background: $sfondo-host;
+  min-height: 100vh;
+  color: $testo-chiaro;
+}
+
+
+// ===== HERO (immagine di sfondo + gradiente) =====
+
+.detail-hero {
+  position: relative;
+  min-height: 420px;
+  overflow: hidden;
+}
+
+// Immagine di sfondo scurita con filter brightness
+.detail-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.3);
+}
+
+// Gradiente scuro da sinistra per leggibilità del testo
+.detail-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(0, 0, 0, .88) 45%, transparent 100%);
+}
+
+// Contenuto testo sovrapposto all'immagine (titolo, meta, pulsanti)
+.detail-content {
+  position: relative;
+  z-index: 1;
+  padding: 4rem 1.5rem 3rem;
+  max-width: 700px;
+}
+
+// Breadcrumb "Serie TV > Stagione X > Episodio Y"
+.detail-breadcrumb {
+  font-size: 0.85rem;
+  color: $testo-muted;
+  margin-bottom: 0.85rem;
+}
+
+// Link cliccabile nel breadcrumb (torna alla pagina della serie)
+.breadcrumb-link {
+  color: $colore-pericolo;
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover { text-decoration: underline; }
+}
+
+// Titolo dell'episodio
+.detail-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin: 0 0 0.4rem;
+  line-height: 1.1;
+}
+
+// Meta-info (stagione, numero episodio, durata)
+.detail-meta {
+  color: #ccc;
+  font-size: 0.9rem;
+  margin: 0.3rem 0 0.6rem;
+}
+
+// Descrizione breve dell'episodio
+.detail-desc {
+  color: #ddd;
+  font-size: 0.95rem;
+  max-width: 600px;
+  margin: 0.5rem 0 1.2rem;
+  line-height: 1.55;
+}
+
+// Testo piccolo "Termini di utilizzo" sotto i pulsanti
+.detail-terms {
+  font-size: 0.78rem;
+  color: #777;
+  margin-top: 0.75rem;
+
+  .terms-link {
+    color: $testo-muted;
+    &:hover { color: $testo-chiaro; }
+  }
+}
+
+// Riga pulsanti azione (Riproduci, Aggiungi, Modifica, Elimina)
+.detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+// Pulsante "Riproduci"
+.btn-riproduci {
+  background: $colore-pericolo;
+  color: $testo-chiaro;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1.4rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color .2s;
+
+  &:hover { background: #c8000f; }
+}
+
+// Pulsante "+ Aggiungi" — bordo bianco semi-trasparente
+.btn-aggiungi {
+  background: transparent;
+  color: $testo-chiaro;
+  border: 2px solid rgba(255, 255, 255, .5);
+  border-radius: 4px;
+  padding: 0.5rem 1.2rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color .2s;
+
+  &:hover { border-color: $testo-chiaro; }
+}
+
+// Pulsanti Modifica ed Elimina — bordo colorato, hover semi-trasparente (mixin)
+.btn-modifica { @include btn-outline-soft($colore-modifica); }
+.btn-elimina  { @include btn-outline-soft($colore-pericolo); }
+
+
+// ===== VIDEO =====
+
+// Wrapper nero che contiene il player video dell'episodio
+.detail-video-wrap {
+  background: #000;
+  padding: 1rem 0;
+}
+
+// Video a larghezza piena, altezza massima limitata
+.detail-video {
+  width: 100%;
+  max-height: 480px;
+  display: block;
+  border-radius: 4px;
+}
+
+
+// ===== MODAL MODIFICA EPISODIO =====
+
+// Contenitore del modal in tema scuro 
+.modal-dark-custom {
+  background: $sfondo-modal;
+  color: $testo-chiaro;
+  border-radius: 8px;
+  border: 1px solid #333;
+}
+
+// Override dark per input, select e textarea Bootstrap
+.form-ctrl-dark {
+  background: $sfondo-form;
+  border-color: $bordo-form;
+  color: $testo-chiaro;
+
+  &:focus {
+    background: $sfondo-form;
+    border-color: $colore-pericolo;
+    color: $testo-chiaro;
+    box-shadow: 0 0 0 0.2rem rgba(229, 9, 20, .2);
+  }
+}
+
+// Divisore visivo tra sezioni del form 
+.section-divider-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: #888;
+  border-bottom: 1px solid #333;
+  padding-bottom: .4rem;
+  margin: 1.2rem 0 .9rem;
+}
+

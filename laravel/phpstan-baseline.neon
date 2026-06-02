@@ -1,0 +1,2752 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Call to an undefined static method App\\Models\\Contatto\:\:whereIn\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Console/Commands/CleanTestData.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ContattoAuth\:\:whereIn\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 2
+			path: app/Console/Commands/CleanTestData.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ContattoPassword\:\:whereIn\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 2
+			path: app/Console/Commands/CleanTestData.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ContattoSessione\:\:whereIn\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 2
+			path: app/Console/Commands/CleanTestData.php
+
+		-
+			message: '#^Invalid array key type float\.$#'
+			identifier: offsetAccess.invalidOffset
+			count: 1
+			path: app/Helpers/Aes.php
+
+		-
+			message: '#^Method App\\Helpers\\Aes\:\:cipher\(\) has invalid return type App\\Helpers\\ciphertext\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Helpers/Aes.php
+
+		-
+			message: '#^Method App\\Helpers\\Aes\:\:cipher\(\) should return App\\Helpers\\ciphertext but returns array\<int, mixed\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Helpers/Aes.php
+
+		-
+			message: '#^Method App\\Helpers\\Aes\:\:keyExpansion\(\) has invalid return type App\\Helpers\\key\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Helpers/Aes.php
+
+		-
+			message: '#^Method App\\Helpers\\Aes\:\:keyExpansion\(\) should return App\\Helpers\\key but returns array\<int, array\<int, mixed\>\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Helpers/Aes.php
+
+		-
+			message: '#^PHPDoc tag @param has invalid value \(input message as byte\-array \(16 bytes\)\)\: Unexpected token "message", expected variable at offset 107 on line 4$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: app/Helpers/Aes.php
+
+		-
+			message: '#^PHPDoc tag @param has invalid value \(key cipher key byte\-array \(16 bytes\)\.\)\: Unexpected token "cipher", expected variable at offset 162 on line 6$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: app/Helpers/Aes.php
+
+		-
+			message: '''
+				#^PHPDoc tag @param has invalid value \(w     key schedule as 2D byte\-array \(Nr\+1 x Nb bytes\) \-
+				             generated from the cipher key by keyExpansion\(\)\)\: Unexpected token "key", expected variable at offset 160 on line 5$#
+			'''
+			identifier: phpDoc.parseError
+			count: 1
+			path: app/Helpers/Aes.php
+
+		-
+			message: '#^Access to offset int\<0, 15\> on an unknown class App\\Helpers\\ciphertext\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Helpers/AesCtr.php
+
+		-
+			message: '#^Access to offset int\<0, max\> on an unknown class App\\Helpers\\ciphertext\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Helpers/AesCtr.php
+
+		-
+			message: '#^Method App\\Helpers\\AesCtr\:\:decrypt\(\) has invalid return type App\\Helpers\\decrypted\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Helpers/AesCtr.php
+
+		-
+			message: '#^Method App\\Helpers\\AesCtr\:\:decrypt\(\) should return App\\Helpers\\decrypted but returns string\.$#'
+			identifier: return.type
+			count: 2
+			path: app/Helpers/AesCtr.php
+
+		-
+			message: '#^PHPDoc tag @param has invalid value \(ciphertext source text to be decrypted\)\: Unexpected token "source", expected variable at offset 107 on line 4$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: app/Helpers/AesCtr.php
+
+		-
+			message: '#^PHPDoc tag @param has invalid value \(nBits      number of bits to be used in the key \(128, 192, or 256\)\)\: Unexpected token "number", expected variable at offset 225 on line 6$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: app/Helpers/AesCtr.php
+
+		-
+			message: '#^PHPDoc tag @param has invalid value \(password   the password to use to generate a key\)\: Unexpected token "the", expected variable at offset 161 on line 5$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: app/Helpers/AesCtr.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\Contatto\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Helpers/AppHelper.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ContattoPassword\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Helpers/AppHelper.php
+
+		-
+			message: '#^Method App\\Helpers\\AppHelper\:\:creaPasswordCifrata\(\) should return array but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Helpers/AppHelper.php
+
+		-
+			message: '#^Method App\\Helpers\\AppHelper\:\:decifra\(\) should return string but returns App\\Helpers\\decrypted\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Helpers/AppHelper.php
+
+		-
+			message: '#^Method App\\Helpers\\AppHelper\:\:validaToken\(\) should return object but returns null\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Helpers/AppHelper.php
+
+		-
+			message: '#^PHPDoc tag @param references unknown parameter\: \$codice$#'
+			identifier: parameter.notFound
+			count: 1
+			path: app/Helpers/AppHelper.php
+
+		-
+			message: '#^PHPDoc tag @param references unknown parameter\: \$errori$#'
+			identifier: parameter.notFound
+			count: 2
+			path: app/Helpers/AppHelper.php
+
+		-
+			message: '#^PHPDoc tag @param references unknown parameter\: \$messaggio$#'
+			identifier: parameter.notFound
+			count: 2
+			path: app/Helpers/AppHelper.php
+
+		-
+			message: '#^PHPDoc tag @param references unknown parameter\: \$password$#'
+			identifier: parameter.notFound
+			count: 1
+			path: app/Helpers/AppHelper.php
+
+		-
+			message: '#^PHPDoc tag @param references unknown parameter\: \$successo$#'
+			identifier: parameter.notFound
+			count: 1
+			path: app/Helpers/AppHelper.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\ContattoSessione\:\:\$idContatto\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/Api/V1/AccediController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\ContattoSessione\:\:\$inizioSessione\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/AccediController.php
+
+		-
+			message: '#^Access to property \$psw on an unknown class App\\Models\\Password\.$#'
+			identifier: class.notFound
+			count: 3
+			path: app/Http/Controllers/Api/V1/AccediController.php
+
+		-
+			message: '#^Access to property \$sale on an unknown class App\\Models\\Password\.$#'
+			identifier: class.notFound
+			count: 5
+			path: app/Http/Controllers/Api/V1/AccediController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ContattoAuth\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 4
+			path: app/Http/Controllers/Api/V1/AccediController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ContattoSessione\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/AccediController.php
+
+		-
+			message: '#^Call to method save\(\) on an unknown class App\\Models\\Password\.$#'
+			identifier: class.notFound
+			count: 2
+			path: app/Http/Controllers/Api/V1/AccediController.php
+
+		-
+			message: '#^PHPDoc tag @param references unknown parameter\: \$hash$#'
+			identifier: parameter.notFound
+			count: 2
+			path: app/Http/Controllers/Api/V1/AccediController.php
+
+		-
+			message: '#^PHPDoc tag @param references unknown parameter\: \$utente$#'
+			identifier: parameter.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/AccediController.php
+
+		-
+			message: '#^Parameter \#1 \$dati of static method App\\Helpers\\AppHelper\:\:rispostaCustom\(\) expects array, bool given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/AccediController.php
+
+		-
+			message: '#^Parameter \#1 \$dati of static method App\\Helpers\\AppHelper\:\:rispostaCustom\(\) expects array, true given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/AccediController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Categoria\:\:\$visualizzato\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/CategoriaController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\Categoria\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/CategoriaController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\Categoria\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/CategoriaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\CategoriaController\:\:index\(\) has invalid return type App\\Http\\Controllers\\Api\\V1\\JsonResource\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/CategoriaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\CategoriaController\:\:index\(\) should return App\\Http\\Controllers\\Api\\V1\\JsonResource but returns App\\Http\\Resources\\Api\\V1\\CategoriaCollection\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/CategoriaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\CategoriaController\:\:show\(\) has invalid return type App\\Http\\Controllers\\Api\\V1\\JsonResource\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/CategoriaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\CategoriaController\:\:show\(\) should return App\\Http\\Controllers\\Api\\V1\\JsonResource but returns App\\Http\\Resources\\Api\\V1\\CategoriaResource\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/CategoriaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\CategoriaController\:\:store\(\) has invalid return type App\\Http\\Controllers\\Api\\V1\\JsonResource\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/CategoriaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\CategoriaController\:\:store\(\) should return App\\Http\\Controllers\\Api\\V1\\JsonResource but returns App\\Http\\Resources\\Api\\V1\\CategoriaResource\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/CategoriaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\CategoriaController\:\:update\(\) has invalid return type App\\Http\\Controllers\\Api\\V1\\JsonResource\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/CategoriaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\CategoriaController\:\:update\(\) should return App\\Http\\Controllers\\Api\\V1\\JsonResource but returns App\\Http\\Resources\\Api\\V1\\CategoriaResource\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/CategoriaController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ComuneItaliano\:\:orderBy\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/ComuneItalianoController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ComuneItalianoController\:\:index\(\) has invalid return type App\\Http\\Resources\\Api\\V1\\ComuneItaliaCollection\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/ComuneItalianoController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ComuneItalianoController\:\:index\(\) should return App\\Http\\Resources\\Api\\V1\\ComuneItaliaCollection but returns App\\Http\\Resources\\Api\\V1\\ComuneItalianoCollection\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/ComuneItalianoController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\Configurazione\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/ConfigurazioneController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\Configurazione\:\:findOrFail\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 3
+			path: app/Http/Controllers/Api/V1/ConfigurazioneController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\Configurazione\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/ConfigurazioneController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ConfigurazioneController\:\:destroy\(\) should return Illuminate\\Http\\Response but returns Illuminate\\Http\\JsonResponse\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/ConfigurazioneController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ConfigurazioneController\:\:getByKey\(\) should return Illuminate\\Http\\Response but returns App\\Http\\Resources\\Api\\V1\\ConfigurazioneResource\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/ConfigurazioneController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ConfigurazioneController\:\:getByKey\(\) should return Illuminate\\Http\\Response but returns Illuminate\\Http\\JsonResponse\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/ConfigurazioneController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ConfigurazioneController\:\:index\(\) should return Illuminate\\Http\\Response but returns App\\Http\\Resources\\Api\\V1\\ConfigurazioneCollection\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/ConfigurazioneController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ConfigurazioneController\:\:show\(\) should return Illuminate\\Http\\Response but returns App\\Http\\Resources\\Api\\V1\\ConfigurazioneResource\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/ConfigurazioneController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ConfigurazioneController\:\:store\(\) should return Illuminate\\Http\\Response but returns Illuminate\\Http\\JsonResponse\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/ConfigurazioneController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ConfigurazioneController\:\:update\(\) should return Illuminate\\Http\\Response but returns Illuminate\\Http\\JsonResponse\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/ConfigurazioneController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ContattoAbilita\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoAbilitaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ContattoAbilitaController\:\:index\(\) should return Illuminate\\Http\\Response but returns App\\Http\\Resources\\Api\\V1\\ContattoAbilitaCollection\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoAbilitaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ContattoAbilitaController\:\:show\(\) should return Illuminate\\Http\\Response but returns App\\Http\\Resources\\Api\\V1\\ContattoAbilitaResource\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoAbilitaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ContattoAbilitaController\:\:store\(\) should return Illuminate\\Http\\Response but returns App\\Http\\Resources\\Api\\V1\\ContattoAbilitaResource\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoAbilitaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ContattoAbilitaController\:\:update\(\) should return Illuminate\\Http\\Response but returns App\\Http\\Resources\\Api\\V1\\ContattoAbilitaResource\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoAbilitaController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\Contatto\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 2
+			path: app/Http/Controllers/Api/V1/ContattoController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\Contatto\:\:findOrFail\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 3
+			path: app/Http/Controllers/Api/V1/ContattoController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ContattoAuth\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ContattoAuth\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 4
+			path: app/Http/Controllers/Api/V1/ContattoController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ContattoPassword\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ContattoPassword\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ContattoPasswordHistory\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ContattoPasswordHistory\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ContattoRuolo\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 3
+			path: app/Http/Controllers/Api/V1/ContattoController.php
+
+		-
+			message: '#^Call to function is_numeric\(\) with float will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ContattoController\:\:changeEmail\(\) should return Illuminate\\Http\\Response but returns Illuminate\\Http\\JsonResponse\.$#'
+			identifier: return.type
+			count: 2
+			path: app/Http/Controllers/Api/V1/ContattoController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ContattoController\:\:changePassword\(\) should return Illuminate\\Http\\Response but returns Illuminate\\Http\\JsonResponse\.$#'
+			identifier: return.type
+			count: 2
+			path: app/Http/Controllers/Api/V1/ContattoController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ContattoController\:\:create\(\) should return Illuminate\\Http\\Response but return statement is missing\.$#'
+			identifier: return.missing
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ContattoController\:\:destroy\(\) should return Illuminate\\Http\\Response but returns Illuminate\\Http\\JsonResponse\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ContattoController\:\:edit\(\) should return Illuminate\\Http\\Response but return statement is missing\.$#'
+			identifier: return.missing
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ContattoController\:\:index\(\) should return Illuminate\\Http\\Response but returns App\\Http\\Resources\\Api\\V1\\ContattoCollection\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ContattoController\:\:registra\(\) should return Illuminate\\Http\\Response but returns Illuminate\\Http\\JsonResponse\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ContattoController\:\:show\(\) should return Illuminate\\Http\\Response but returns App\\Http\\Resources\\Api\\V1\\ContattoResource\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ContattoController\:\:store\(\) should return Illuminate\\Http\\Response but returns Illuminate\\Http\\JsonResponse\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ContattoController\:\:update\(\) should return Illuminate\\Http\\Response but returns Illuminate\\Http\\JsonResponse\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ContattoController\:\:updateCredito\(\) should return Illuminate\\Http\\Response but returns Illuminate\\Http\\JsonResponse\.$#'
+			identifier: return.type
+			count: 4
+			path: app/Http/Controllers/Api/V1/ContattoController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Contatto\:\:\$idContatto\.$#'
+			identifier: property.notFound
+			count: 4
+			path: app/Http/Controllers/Api/V1/ContattoIndirizzoController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\ContattoIndirizzo\:\:\$idContatto\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Http/Controllers/Api/V1/ContattoIndirizzoController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ContattoIndirizzo\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoIndirizzoController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ContattoIndirizzoController\:\:index\(\) should return Illuminate\\Http\\Response but returns App\\Http\\Resources\\Api\\V1\\ContattoIndirizzoCollection\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoIndirizzoController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ContattoIndirizzoController\:\:show\(\) should return Illuminate\\Http\\Response but returns App\\Http\\Resources\\Api\\V1\\ContattoIndirizzoResource\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoIndirizzoController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ContattoIndirizzoController\:\:store\(\) should return Illuminate\\Http\\Response but returns App\\Http\\Resources\\Api\\V1\\ContattoIndirizzoResource\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoIndirizzoController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ContattoIndirizzoController\:\:update\(\) should return Illuminate\\Http\\Response but returns App\\Http\\Resources\\Api\\V1\\ContattoIndirizzoResource\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoIndirizzoController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Http\\Request\:\:\$email\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoRecapitoController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Http\\Request\:\:\$preferiti\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoRecapitoController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Http\\Request\:\:\$telefoni\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoRecapitoController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Http\\Request\:\:\$tipo\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoRecapitoController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\Contatto\:\:findOrFail\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 7
+			path: app/Http/Controllers/Api/V1/ContattoRecapitoController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ContattoRecapito\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoRecapitoController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ContattoRecapito\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 2
+			path: app/Http/Controllers/Api/V1/ContattoRecapitoController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ContattoRuolo\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoRuoloController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ContattoRuolo\:\:findOrFail\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 3
+			path: app/Http/Controllers/Api/V1/ContattoRuoloController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ContattoRuoloController\:\:create\(\) should return Illuminate\\Http\\Response but return statement is missing\.$#'
+			identifier: return.missing
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoRuoloController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ContattoRuoloController\:\:destroy\(\) should return Illuminate\\Http\\Response but returns Illuminate\\Http\\JsonResponse\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoRuoloController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ContattoRuoloController\:\:edit\(\) should return Illuminate\\Http\\Response but return statement is missing\.$#'
+			identifier: return.missing
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoRuoloController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ContattoRuoloController\:\:index\(\) should return Illuminate\\Http\\Response but returns App\\Http\\Resources\\Api\\V1\\ContattoRuoloCollection\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoRuoloController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ContattoRuoloController\:\:show\(\) should return Illuminate\\Http\\Response but returns App\\Http\\Resources\\Api\\V1\\ContattoRuoloResource\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoRuoloController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ContattoRuoloController\:\:store\(\) should return Illuminate\\Http\\Response but returns Illuminate\\Http\\JsonResponse\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoRuoloController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ContattoRuoloController\:\:update\(\) should return Illuminate\\Http\\Response but returns Illuminate\\Http\\JsonResponse\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoRuoloController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Http\\Request\:\:\$nome\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoStatoController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ContattoStato\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoStatoController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ContattoStatoController\:\:destroy\(\) should return Illuminate\\Http\\Response but returns Illuminate\\Http\\JsonResponse\.$#'
+			identifier: return.type
+			count: 2
+			path: app/Http/Controllers/Api/V1/ContattoStatoController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ContattoStatoController\:\:index\(\) should return Illuminate\\Http\\Response but returns App\\Http\\Resources\\Api\\V1\\ContattoStatoCollection\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoStatoController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ContattoStatoController\:\:show\(\) should return Illuminate\\Http\\Response but returns App\\Http\\Resources\\Api\\V1\\ContattoStatoResource\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoStatoController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ContattoStatoController\:\:store\(\) should return Illuminate\\Http\\Response but returns App\\Http\\Resources\\Api\\V1\\ContattoStatoResource\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoStatoController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\ContattoStatoController\:\:update\(\) should return Illuminate\\Http\\Response but returns App\\Http\\Resources\\Api\\V1\\ContattoStatoResource\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/ContattoStatoController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Builder\:\:perSerie\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/EpisodioController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\Episodio\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/EpisodioController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\Episodio\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 2
+			path: app/Http/Controllers/Api/V1/EpisodioController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\SerieTv\:\:findOrFail\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 5
+			path: app/Http/Controllers/Api/V1/EpisodioController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\Film\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/FilmController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\FilmController\:\:destroy\(\) should return Illuminate\\Http\\Response but returns Illuminate\\Http\\JsonResponse\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/FilmController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\FilmController\:\:index\(\) should return Illuminate\\Http\\Response but returns Illuminate\\Http\\Resources\\Json\\AnonymousResourceCollection\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/FilmController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\FilmController\:\:show\(\) should return Illuminate\\Http\\Response but returns App\\Http\\Resources\\Api\\V1\\FilmResource\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/FilmController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\FilmController\:\:store\(\) should return Illuminate\\Http\\Response but returns Illuminate\\Http\\JsonResponse\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/FilmController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\FilmController\:\:update\(\) should return Illuminate\\Http\\Response but returns App\\Http\\Resources\\Api\\V1\\FilmResource\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/FilmController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\Lingua\:\:attivo\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/LinguaController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Builder\:\:byContinente\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/NazioneController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Builder\:\:byIso\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/NazioneController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\Nazione\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/NazioneController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\NazioneController\:\:index\(\) should return Illuminate\\Http\\Response but returns App\\Http\\Resources\\Api\\V1\\NazioneCollection\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/NazioneController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\NazioneController\:\:show\(\) should return Illuminate\\Http\\Response but returns App\\Http\\Resources\\Api\\V1\\NazioneResource\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/NazioneController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\NazioneController\:\:store\(\) should return Illuminate\\Http\\Response but returns App\\Http\\Resources\\Api\\V1\\NazioneResource\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/NazioneController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\NazioneController\:\:update\(\) should return Illuminate\\Http\\Response but returns App\\Http\\Resources\\Api\\V1\\NazioneResource\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/NazioneController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Builder\:\:perCategoria\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/SerieTvController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Builder\:\:ultimi\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/SerieTvController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\SerieTv\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/SerieTvController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\SerieTv\:\:findOrFail\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 2
+			path: app/Http/Controllers/Api/V1/SerieTvController.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between object and null will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Http/Controllers/Api/V1/TestAuthController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Http\\Request\:\:\$attivi\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/TipoIndirizzoController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Http\\Request\:\:\$search\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/TipoIndirizzoController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Builder\:\:attivi\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/TipoIndirizzoController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\TipoIndirizzo\:\:findOrFail\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/TipoIndirizzoController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\TipoRecapito\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/TipoRecapitoController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\VistaProvinciaController\:\:show\(\) should return App\\Http\\Resources\\Api\\V1\\VistaProvinciaResource but returns Illuminate\\Http\\JsonResponse\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/VistaProvinciaController.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\Contatto\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Http/Middleware/Autenticazione.php
+
+		-
+			message: '#^Method App\\Http\\Middleware\\Authenticate\:\:redirectTo\(\) should return string\|null but return statement is missing\.$#'
+			identifier: return.missing
+			count: 1
+			path: app/Http/Middleware/Authenticate.php
+
+		-
+			message: '#^Cannot access property \$idContattoAbilita on object\|string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Requests/Api/V1/ContattoAbilitaUpdateRequest.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Requests\\Api\\V1\\ContattoRecapitoStoreRequest\:\:\$idTipoRecapito\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Requests/Api/V1/ContattoRecapitoStoreRequest.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Requests\\Api\\V1\\ContattoRecapitoStoreRequest\:\:\$valore\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Requests/Api/V1/ContattoRecapitoStoreRequest.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Requests\\Api\\V1\\ContattoRecapitoUpdateRequest\:\:\$idTipoRecapito\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Requests/Api/V1/ContattoRecapitoUpdateRequest.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Requests\\Api\\V1\\ContattoRecapitoUpdateRequest\:\:\$valore\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Requests/Api/V1/ContattoRecapitoUpdateRequest.php
+
+		-
+			message: '#^Cannot access property \$idNazione on object\|string\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: app/Http/Requests/Api/V1/NazioneUpdateRequest.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Requests\\V1\\CategoriaUpdateRequest\:\:\$categoria\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Requests/V1/CategoriaUpdateRequest.php
+
+		-
+			message: '#^Cannot access property \$idContattoStato on object\|string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Requests/V1/ContattoStatoUpdateRequest.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\CategoriaResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/CategoriaResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\CategoriaResource\:\:\$idCategoria\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/CategoriaResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\CategoriaResource\:\:\$nome\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/CategoriaResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\CategoriaResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/CategoriaResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ComuneItalianoResource\:\:\$abitanti\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ComuneItalianoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ComuneItalianoResource\:\:\$cap\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ComuneItalianoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ComuneItalianoResource\:\:\$cap_finale\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ComuneItalianoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ComuneItalianoResource\:\:\$cap_iniziale\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ComuneItalianoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ComuneItalianoResource\:\:\$codice_istat\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Resources/Api/V1/ComuneItalianoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ComuneItalianoResource\:\:\$comune\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ComuneItalianoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ComuneItalianoResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ComuneItalianoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ComuneItalianoResource\:\:\$idComune\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ComuneItalianoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ComuneItalianoResource\:\:\$provincia\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ComuneItalianoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ComuneItalianoResource\:\:\$regione\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ComuneItalianoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ComuneItalianoResource\:\:\$sigla_provincia\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ComuneItalianoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ComuneItalianoResource\:\:\$superficie\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ComuneItalianoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ComuneItalianoResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ComuneItalianoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ComuneItalianoResource\:\:\$zona\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ComuneItalianoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ConfigurazioneResource\:\:\$chiave\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ConfigurazioneResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ConfigurazioneResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ConfigurazioneResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ConfigurazioneResource\:\:\$idConfigurazione\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ConfigurazioneResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ConfigurazioneResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ConfigurazioneResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ConfigurazioneResource\:\:\$valore\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ConfigurazioneResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoAbilitaResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoAbilitaResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoAbilitaResource\:\:\$idContattoAbilita\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoAbilitaResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoAbilitaResource\:\:\$nome\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoAbilitaResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoAbilitaResource\:\:\$sku\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoAbilitaResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoAbilitaResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoAbilitaResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoCreditoResource\:\:\$attivo\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoCreditoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoCreditoResource\:\:\$contatto\.$#'
+			identifier: property.notFound
+			count: 5
+			path: app/Http/Resources/Api/V1/ContattoCreditoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoCreditoResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoCreditoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoCreditoResource\:\:\$deleted_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoCreditoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoCreditoResource\:\:\$disponibilita_totale\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoCreditoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoCreditoResource\:\:\$idContatto\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoCreditoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoCreditoResource\:\:\$idCredito\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoCreditoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoCreditoResource\:\:\$limite\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoCreditoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoCreditoResource\:\:\$limite_formattato\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoCreditoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoCreditoResource\:\:\$percentuale_utilizzo_limite\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoCreditoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoCreditoResource\:\:\$saldo\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoCreditoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoCreditoResource\:\:\$saldo_formattato\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoCreditoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoCreditoResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoCreditoResource.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\Api\\V1\\ContattoCreditoResource\:\:hasSaldoPositivo\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoCreditoResource.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\Api\\V1\\ContattoCreditoResource\:\:isInDebito\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoCreditoResource.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\Api\\V1\\ContattoCreditoResource\:\:puoSpendere\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoCreditoResource.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\Api\\V1\\ContattoCreditoResource\:\:relationLoaded\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoCreditoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoIndirizzoResource\:\:\$cap\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoIndirizzoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoIndirizzoResource\:\:\$civico\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoIndirizzoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoIndirizzoResource\:\:\$comune\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoIndirizzoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoIndirizzoResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoIndirizzoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoIndirizzoResource\:\:\$idIndirizzo\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoIndirizzoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoIndirizzoResource\:\:\$idTipologiaIndirizzo\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoIndirizzoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoIndirizzoResource\:\:\$indirizzo\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoIndirizzoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoIndirizzoResource\:\:\$indirizzo_completo\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoIndirizzoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoIndirizzoResource\:\:\$localita\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoIndirizzoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoIndirizzoResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoIndirizzoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoRecapitoResource\:\:\$contatto\.$#'
+			identifier: property.notFound
+			count: 5
+			path: app/Http/Resources/Api/V1/ContattoRecapitoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoRecapitoResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoRecapitoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoRecapitoResource\:\:\$deleted_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoRecapitoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoRecapitoResource\:\:\$descrizione\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoRecapitoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoRecapitoResource\:\:\$idRecapito\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoRecapitoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoRecapitoResource\:\:\$idTipoRecapito\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoRecapitoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoRecapitoResource\:\:\$preferito\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoRecapitoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoRecapitoResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoRecapitoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoRecapitoResource\:\:\$valore\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoRecapitoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoRecapitoResource\:\:\$valore_formattato\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoRecapitoResource.php
+
+		-
+			message: '#^Anonymous function has an unused use \$isAdmin\.$#'
+			identifier: closure.unusedUse
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoRecapitoResource.php
+
+		-
+			message: '#^Anonymous function has an unused use \$isUser\.$#'
+			identifier: closure.unusedUse
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoRecapitoResource.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\Api\\V1\\ContattoRecapitoResource\:\:isCellulare\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoRecapitoResource.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\Api\\V1\\ContattoRecapitoResource\:\:isEmail\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoRecapitoResource.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\Api\\V1\\ContattoRecapitoResource\:\:isTelefono\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoRecapitoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoResource\:\:\$auth\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoResource\:\:\$cittaNascita\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoResource\:\:\$codiceFiscale\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoResource\:\:\$cognome\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Resources/Api/V1/ContattoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoResource\:\:\$created_by\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoResource\:\:\$dataNascita\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoResource\:\:\$deleted_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoResource\:\:\$idContatto\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoResource\:\:\$nome\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Resources/Api/V1/ContattoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoResource\:\:\$partitaIva\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoResource\:\:\$sesso\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoResource\:\:\$updated_by\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoRuoloResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoRuoloResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoRuoloResource\:\:\$idContattoRuolo\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoRuoloResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoRuoloResource\:\:\$nome\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoRuoloResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoRuoloResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoRuoloResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoStatoResource\:\:\$contatti\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoStatoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoStatoResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoStatoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoStatoResource\:\:\$idContattoStato\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoStatoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoStatoResource\:\:\$nome\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoStatoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\ContattoStatoResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoStatoResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Http\\Request\:\:\$include_stats\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/ContattoStatoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\EpisodioResource\:\:\$anno\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/EpisodioResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\EpisodioResource\:\:\$codice_episodio\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/EpisodioResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\EpisodioResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/EpisodioResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\EpisodioResource\:\:\$descrizione\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/EpisodioResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\EpisodioResource\:\:\$durata\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/EpisodioResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\EpisodioResource\:\:\$durata_formattata\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/EpisodioResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\EpisodioResource\:\:\$idEpisodio\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/EpisodioResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\EpisodioResource\:\:\$idFilmato\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/EpisodioResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\EpisodioResource\:\:\$idImmagine\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/EpisodioResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\EpisodioResource\:\:\$numeroEpisodio\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/EpisodioResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\EpisodioResource\:\:\$numeroStagione\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/EpisodioResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\EpisodioResource\:\:\$serieTv\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Http/Resources/Api/V1/EpisodioResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\EpisodioResource\:\:\$titolo\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/EpisodioResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\EpisodioResource\:\:\$titolo_completo\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/EpisodioResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\EpisodioResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/EpisodioResource.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\Api\\V1\\EpisodioResource\:\:isFinale\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/EpisodioResource.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\Api\\V1\\EpisodioResource\:\:isPilot\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/EpisodioResource.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\Api\\V1\\FilmCollection\:\:currentPage\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/FilmCollection.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\Api\\V1\\FilmCollection\:\:hasMorePages\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/FilmCollection.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\Api\\V1\\FilmCollection\:\:lastPage\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/FilmCollection.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\Api\\V1\\FilmCollection\:\:perPage\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/FilmCollection.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\Api\\V1\\FilmCollection\:\:total\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/FilmCollection.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\FilmResource\:\:\$anno\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/FilmResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\FilmResource\:\:\$attori\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/FilmResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\FilmResource\:\:\$carousel\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/FilmResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\FilmResource\:\:\$categoria\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Resources/Api/V1/FilmResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\FilmResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/FilmResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\FilmResource\:\:\$descrizione\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/FilmResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\FilmResource\:\:\$durata\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/FilmResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\FilmResource\:\:\$durata_formattata\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/FilmResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\FilmResource\:\:\$idCategoria\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/FilmResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\FilmResource\:\:\$idFilm\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/FilmResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\FilmResource\:\:\$locandina\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/FilmResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\FilmResource\:\:\$regista\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/FilmResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\FilmResource\:\:\$titolo\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/FilmResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\FilmResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/FilmResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\FilmResource\:\:\$video\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/FilmResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\LinguaResource\:\:\$attivo\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/LinguaResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\LinguaResource\:\:\$bandiera\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/LinguaResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\LinguaResource\:\:\$codice\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/LinguaResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\LinguaResource\:\:\$codice_upper\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/LinguaResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\LinguaResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/LinguaResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\LinguaResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/LinguaResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\LinguaResource\:\:\$nome\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/LinguaResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\LinguaResource\:\:\$nome_completo\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/LinguaResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\LinguaResource\:\:\$nome_nativo\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/LinguaResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\LinguaResource\:\:\$ordinamento\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/LinguaResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\LinguaResource\:\:\$predefinita\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/LinguaResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\LinguaResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/LinguaResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\NazioneResource\:\:\$continente\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/NazioneResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\NazioneResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/NazioneResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\NazioneResource\:\:\$formato_completo\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/NazioneResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\NazioneResource\:\:\$idNazione\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/NazioneResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\NazioneResource\:\:\$iso\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/NazioneResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\NazioneResource\:\:\$iso3\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/NazioneResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\NazioneResource\:\:\$nome\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/NazioneResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\NazioneResource\:\:\$prefissoTelefonico\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/NazioneResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\NazioneResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/NazioneResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\SerieTvResource\:\:\$attori\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/SerieTvResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\SerieTvResource\:\:\$categoria\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Http/Resources/Api/V1/SerieTvResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\SerieTvResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/SerieTvResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\SerieTvResource\:\:\$descrizione\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/SerieTvResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\SerieTvResource\:\:\$episodi\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/SerieTvResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\SerieTvResource\:\:\$idFilmato\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/SerieTvResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\SerieTvResource\:\:\$idImmagine\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/SerieTvResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\SerieTvResource\:\:\$idSerie\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/SerieTvResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\SerieTvResource\:\:\$nome\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/SerieTvResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\SerieTvResource\:\:\$regista\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/SerieTvResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\SerieTvResource\:\:\$totaleStagioni\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/SerieTvResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\SerieTvResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/SerieTvResource.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\Api\\V1\\SerieTvResource\:\:isInCorso\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/SerieTvResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\TipoIndirizzoResource\:\:\$attivo\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/TipoIndirizzoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\TipoIndirizzoResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/TipoIndirizzoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\TipoIndirizzoResource\:\:\$deleted_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/TipoIndirizzoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\TipoIndirizzoResource\:\:\$descrizione\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/TipoIndirizzoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\TipoIndirizzoResource\:\:\$idTipoIndirizzo\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/TipoIndirizzoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\TipoIndirizzoResource\:\:\$nome\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/TipoIndirizzoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\TipoIndirizzoResource\:\:\$ordinamento\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/TipoIndirizzoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\TipoIndirizzoResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/TipoIndirizzoResource.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\Api\\V1\\TipoIndirizzoResource\:\:isAdmin\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/TipoIndirizzoResource.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\Api\\V1\\TipoIndirizzoResource\:\:isUser\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/TipoIndirizzoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\TipoRecapitoResource\:\:\$attivo\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/TipoRecapitoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\TipoRecapitoResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/TipoRecapitoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\TipoRecapitoResource\:\:\$descrizione\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/TipoRecapitoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\TipoRecapitoResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/TipoRecapitoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\TipoRecapitoResource\:\:\$ordinamento\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/TipoRecapitoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\TipoRecapitoResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/TipoRecapitoResource.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\Api\\V1\\TipoRecapitoResource\:\:isCellulare\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/TipoRecapitoResource.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\Api\\V1\\TipoRecapitoResource\:\:isEmail\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/TipoRecapitoResource.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\Api\\V1\\TipoRecapitoResource\:\:isFax\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/TipoRecapitoResource.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\Api\\V1\\TipoRecapitoResource\:\:isTelefono\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/TipoRecapitoResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\VistaProvinciaResource\:\:\$count_comuni\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/VistaProvinciaResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\VistaProvinciaResource\:\:\$nome\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/VistaProvinciaResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\VistaProvinciaResource\:\:\$regione\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/VistaProvinciaResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\VistaProvinciaResource\:\:\$sigla\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/VistaProvinciaResource.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\Api\\V1\\VistaProvinciaResource\:\:isCentro\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/VistaProvinciaResource.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\Api\\V1\\VistaProvinciaResource\:\:isIsole\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/VistaProvinciaResource.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\Api\\V1\\VistaProvinciaResource\:\:isNord\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/VistaProvinciaResource.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\Api\\V1\\VistaProvinciaResource\:\:isSud\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/VistaProvinciaResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\VistaTraduzioneResource\:\:\$chiave\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/VistaTraduzioneResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\VistaTraduzioneResource\:\:\$gruppo\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/VistaTraduzioneResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\VistaTraduzioneResource\:\:\$lingua_codice\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/VistaTraduzioneResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\VistaTraduzioneResource\:\:\$lingua_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/VistaTraduzioneResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Api\\V1\\VistaTraduzioneResource\:\:\$valore\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/VistaTraduzioneResource.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\Configurazione\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Models/Configurazione.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\Contatto\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 3
+			path: app/Models/Contatto.php
+
+		-
+			message: '#^Method App\\Models\\Contatto\:\:aggiungiContattoRuoli\(\) has invalid return type App\\Models\\Collection\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Models/Contatto.php
+
+		-
+			message: '#^Method App\\Models\\Contatto\:\:eliminaContattoRuoli\(\) has invalid return type App\\Models\\Collection\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Models/Contatto.php
+
+		-
+			message: '#^Method App\\Models\\Contatto\:\:sincronizzaContattoRuoli\(\) has invalid return type App\\Models\\Collection\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Models/Contatto.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ContattoAccesso\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Models/ContattoAccesso.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ContattoAccesso\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 2
+			path: app/Models/ContattoAccesso.php
+
+		-
+			message: '#^Method App\\Models\\ContattoAccesso\:\:nuovoRecord\(\) has invalid return type App\\Models\\Accesso\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Models/ContattoAccesso.php
+
+		-
+			message: '#^Parameter \#1 \$idContatto of static method App\\Models\\ContattoAccesso\:\:nuovoRecord\(\) expects string, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Models/ContattoAccesso.php
+
+		-
+			message: '#^Parameter \#2 \$autenticato of static method App\\Models\\ContattoAccesso\:\:nuovoRecord\(\) expects bool, int given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Models/ContattoAccesso.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\ContattoCredito\:\:\$attivo\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/ContattoCredito.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\ContattoCredito\:\:\$limite\.$#'
+			identifier: property.notFound
+			count: 4
+			path: app/Models/ContattoCredito.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\ContattoCredito\:\:\$saldo\.$#'
+			identifier: property.notFound
+			count: 9
+			path: app/Models/ContattoCredito.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\ContattoIndirizzo\:\:\$cap\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/ContattoIndirizzo.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\ContattoIndirizzo\:\:\$civico\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/ContattoIndirizzo.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\ContattoIndirizzo\:\:\$comune\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/ContattoIndirizzo.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\ContattoIndirizzo\:\:\$indirizzo\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/ContattoIndirizzo.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\ContattoIndirizzo\:\:\$localita\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/ContattoIndirizzo.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\ContattoIndirizzo\:\:\$nazione\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/ContattoIndirizzo.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ContattoPassword\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Models/ContattoPassword.php
+
+		-
+			message: '#^Method App\\Models\\ContattoPassword\:\:passwordAttuale\(\) has invalid return type App\\Models\\Password\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Models/ContattoPassword.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\ContattoRecapito\:\:\$valore\.$#'
+			identifier: property.notFound
+			count: 5
+			path: app/Models/ContattoRecapito.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ContattoRuolo\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Models/ContattoRuolo.php
+
+		-
+			message: '#^Method App\\Models\\ContattoRuolo\:\:aggiungiRuoloAbilita\(\) has invalid return type App\\Models\\Collection\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Models/ContattoRuolo.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ContattoSessione\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Models/ContattoSessione.php
+
+		-
+			message: '#^Method App\\Models\\ContattoSessione\:\:datiSessione\(\) should return App\\Models\\ContattoSessione but returns null\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/ContattoSessione.php
+
+		-
+			message: '#^PHPDoc tag @param references unknown parameter\: \$token$#'
+			identifier: parameter.notFound
+			count: 1
+			path: app/Models/ContattoSessione.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Episodio\:\:\$codice_episodio\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/Episodio.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Episodio\:\:\$durata\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/Episodio.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Episodio\:\:\$idEpisodio\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/Episodio.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Episodio\:\:\$idSerie\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/Episodio.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Episodio\:\:\$numeroEpisodio\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Models/Episodio.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Episodio\:\:\$numeroStagione\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Models/Episodio.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Episodio\:\:\$titolo\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Models/Episodio.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\Episodio\:\:perSerie\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Models/Episodio.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Lingua\:\:\$attivo\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/Lingua.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Lingua\:\:\$codice\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Models/Lingua.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Lingua\:\:\$nome\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/Lingua.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Lingua\:\:\$predefinita\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/Lingua.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\Lingua\:\:predefinita\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Models/Lingua.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\Lingua\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Models/Lingua.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Nazione\:\:\$iso\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/Nazione.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Nazione\:\:\$nome\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/Nazione.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\SerieTv\:\:\$annoFine\.$#'
+			identifier: property.notFound
+			count: 5
+			path: app/Models/SerieTv.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\SerieTv\:\:\$annoInizio\.$#'
+			identifier: property.notFound
+			count: 4
+			path: app/Models/SerieTv.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\TipoIndirizzo\:\:\$nome\.$#'
+			identifier: property.notFound
+			count: 7
+			path: app/Models/TipoIndirizzo.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\TipoRecapito\:\:\$formato\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/TipoRecapito.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\TipoRecapito\:\:\$nome\.$#'
+			identifier: property.notFound
+			count: 7
+			path: app/Models/TipoRecapito.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Traduzione\:\:\$valore\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/Traduzione.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\Traduzione\:\:perLingua\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Models/Traduzione.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\VistaProvincia\:\:\$count_comuni\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Models/VistaProvincia.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\VistaProvincia\:\:\$nome\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Models/VistaProvincia.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\VistaProvincia\:\:\$regione\.$#'
+			identifier: property.notFound
+			count: 7
+			path: app/Models/VistaProvincia.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\VistaProvincia\:\:\$sigla\.$#'
+			identifier: property.notFound
+			count: 4
+			path: app/Models/VistaProvincia.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ComuneItaliano\:\:selectRaw\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 3
+			path: app/Models/VistaProvincia.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ComuneItaliano\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Models/VistaProvincia.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 3
+			path: app/Models/VistaProvincia.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\VistaTraduzioni\:\:\$chiave\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Models/VistaTraduzioni.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\VistaTraduzioni\:\:\$gruppo\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Models/VistaTraduzioni.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\VistaTraduzioni\:\:\$lingua_codice\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Models/VistaTraduzioni.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\VistaTraduzioni\:\:\$lingua_id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Models/VistaTraduzioni.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\VistaTraduzioni\:\:\$valore\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Models/VistaTraduzioni.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 2
+			path: app/Models/VistaTraduzioni.php
+
+		-
+			message: '#^PHPDoc tag @var above a method has no effect\.$#'
+			identifier: varTag.misplaced
+			count: 1
+			path: app/Providers/RouteServiceProvider.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Schema\\ColumnDefinition\:\:length\(\)\.$#'
+			identifier: method.notFound
+			count: 6
+			path: database/migrations/2025_11_27_174453_create_film_table.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Schema\\ColumnDefinition\:\:length\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: database/migrations/2026_04_13_100002_add_media_paths_to_film_table.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\Categoria\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 5
+			path: database/seeders/CategoriaSeeder.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ComuneItaliano\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: database/seeders/ComuneItaliaSeeder.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\Configurazione\:\:firstOrCreate\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: database/seeders/ConfigurazioneSeeder.php
+
+		-
+			message: '#^Call to an undefined static method Illuminate\\Support\\Facades\\DB\:\:getSchemaBuilder\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 2
+			path: database/seeders/ContattiContattiruoloFixSeeder.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\Contatto\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: database/seeders/ContattiSeeder.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ContattoPassword\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: database/seeders/ContattiSeeder.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ContattoRuolo\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 3
+			path: database/seeders/ContattiSeeder.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ContattoAbilita\:\:insert\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: database/seeders/ContattoAbilitaSeeder.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ContattoAbilita\:\:truncate\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: database/seeders/ContattoAbilitaSeeder.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Contatto\:\:\$idContatto\.$#'
+			identifier: property.notFound
+			count: 1
+			path: database/seeders/ContattoIndirizziSeeder.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ComuneItaliano\:\:inRandomOrder\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: database/seeders/ContattoIndirizziSeeder.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ContattoIndirizzo\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: database/seeders/ContattoIndirizziSeeder.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\Nazione\:\:first\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: database/seeders/ContattoIndirizziSeeder.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\Nazione\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: database/seeders/ContattoIndirizziSeeder.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\TipoIndirizzo\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 2
+			path: database/seeders/ContattoIndirizziSeeder.php
+
+		-
+			message: '#^Method Database\\Seeders\\ContattoIndirizziSeeder\:\:randomBusinessStreet\(\) is unused\.$#'
+			identifier: method.unused
+			count: 1
+			path: database/seeders/ContattoIndirizziSeeder.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Contatto\:\:\$cognome\.$#'
+			identifier: property.notFound
+			count: 1
+			path: database/seeders/ContattoRecapitiSeeder.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Contatto\:\:\$idContatto\.$#'
+			identifier: property.notFound
+			count: 2
+			path: database/seeders/ContattoRecapitiSeeder.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Contatto\:\:\$nome\.$#'
+			identifier: property.notFound
+			count: 1
+			path: database/seeders/ContattoRecapitiSeeder.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ContattoRecapito\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 2
+			path: database/seeders/ContattoRecapitiSeeder.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ContattoRuolo\:\:firstOrCreate\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: database/seeders/ContattoRuoloSeeder.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\Contatto\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 5
+			path: database/seeders/ContattoSeeder.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ContattoStato\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: database/seeders/ContattoStatoSeeder.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\ContattoStato\:\:truncate\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: database/seeders/ContattoStatoSeeder.php
+
+		-
+			message: '#^Call to an undefined static method Illuminate\\Support\\Facades\\DB\:\:getSchemaBuilder\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 4
+			path: database/seeders/EpisodiSerieContattoRuoloSeeder.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\Episodio\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: database/seeders/EpisodioSeeder.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\Film\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: database/seeders/FilmSeeder.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\Film\:\:truncate\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: database/seeders/FilmSeeder.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\Lingua\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: database/seeders/LinguaSeeder.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\Nazione\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: database/seeders/NazioneSeeder.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\Nazione\:\:truncate\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: database/seeders/NazioneSeeder.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\SerieTv\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: database/seeders/SerieTvSeeder.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\Traduzione\:\:updateOrCreate\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: database/seeders/TraduzioneSeeder.php
+
+		-
+			message: '#^Call to an undefined static method App\\Models\\User\:\:updateOrCreate\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: database/seeders/UserSeeder.php
+
+		-
+			message: '#^Undefined variable\: \$this$#'
+			identifier: variable.undefined
+			count: 1
+			path: routes/console.php

@@ -1,0 +1,141 @@
+﻿
+// ===== VARIABILI =====
+
+$colore-accento: #e87c25;                    // arancione principale
+$sfondo-host:    #0b0b0d;                    // sfondo dell'intera pagina
+$sfondo-card:    #111214;                    // sfondo card film/serie
+$testo-chiaro:   #e9ecef;                    // testo principale chiaro
+$bordo-card:     rgba(255, 255, 255, 0.04);  // bordo sottile sulle card
+$bp-md:          768px;                      // breakpoint responsive
+
+
+// ===== HOST =====
+
+:host {
+  display: block;
+  background-color: $sfondo-host;
+  color: $testo-chiaro;
+  min-height: 100vh;
+}
+
+
+// ===== HEADER CATEGORIA =====
+
+// Banda in cima con il nome della categoria e gradiente scuro
+.categoria-header {
+  background: linear-gradient(180deg, #1a1a1f 0%, #0b0b0d 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, .06);
+}
+
+
+// ===== TITOLO DI SEZIONE =====
+
+.section-title {
+  font-weight: 600;
+  color: $testo-chiaro;
+  font-size: 1.8rem;
+
+  // Su mobile il titolo scala per evitare overflow (annidato nel selettore)
+  @media (max-width: $bp-md) { font-size: 1.4rem; }
+}
+
+
+// ===== SLIDE WRAP + FRECCE =====
+
+// Contenitore orizzontale con frecce laterali e lista card
+.slide-wrap {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+// Freccia di navigazione (precedente / successiva)
+.slide-arrow {
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, .08);
+  color: $testo-chiaro;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color .2s;
+
+  &:hover { background: rgba(255, 100, 100, .5); }
+
+  // Freccia nascosta quando non esiste slide precedente/successiva
+  &.invisible { visibility: hidden; pointer-events: none; }
+}
+
+
+// ===== CARD =====
+
+// Card film/serie TV: sfondo scuro, bordo sottile
+.card {
+  background: $sfondo-card;
+  border: 1px solid $bordo-card;
+  color: $testo-chiaro;
+  padding: 0;
+  overflow: visible;
+}
+
+// Effetto hover: scala la card e porta in primo piano (z-index)
+.card-hover {
+  position: relative;
+  transition: transform .22s ease, box-shadow .22s ease;
+  transform-origin: center top;
+
+  &:hover,
+  &.playing {
+    transform: scale(1.06);
+    z-index: 40;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, .45);
+  }
+
+  // Quando il video è pronto, nasconde il thumbnail e mostra il video
+  &.video-ready {
+    .thumb      { opacity: 0; }
+    .card-video { opacity: 1; }
+  }
+}
+
+// Wrapper immagine/video della card
+.media-wrap {
+  position: relative;
+  height: 160px;
+  overflow: hidden;
+
+  // Riduce l'altezza su mobile (annidato nel selettore)
+  @media (max-width: $bp-md) { height: 140px; }
+}
+
+// Thumbnail dell'immagine di copertina
+.thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity .28s;
+}
+
+// Video in sovrimpressione 
+.card-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity .28s;
+  z-index: 1;
+}
+
+// Pannello descrizione che scende al hover sulla card
+.hover-panel {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height .35s ease;
+
+  &.show { max-height: 160px; }
+}
+

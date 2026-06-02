@@ -1,0 +1,104 @@
+
+// ===== VARIABILI =====
+
+$sfondo-card:   rgba(0, 0, 0, 0.85);           // sfondo semi-trasparente della card
+$bordo-card:    rgba(255, 255, 255, 0.06);      // bordo sottile su sfondo scuro
+$bordo-input:   rgba(255, 255, 255, 0.06);      // bordo campi input
+$sfondo-input:  rgba(255, 255, 255, 0.04);      // sfondo campi input
+$bp-sm:         576px;                          // breakpoint mobile
+
+
+// Sezione hero: immagine di sfondo con overlay scuro, altezza piena schermo
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3.5rem 1rem 2rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: calc(100vh - 140px);
+}
+
+// Card contenente il form di login
+.card-registrazione {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+  width: 100%;
+  background: $sfondo-card;
+  color: #fff;
+  border-radius: 0.75rem;
+  border: 1px solid $bordo-card;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+  overflow: visible;
+  margin: 0 auto;
+  min-height: 220px;
+
+  .card-body { padding: 0.9rem; }
+
+  // Titolo della card con due righe a dimensioni diverse
+  .card-title {
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.25rem;
+
+    .line1 { display: block; font-size: 1.4rem; line-height: 1.05; }
+    .line2 { display: block; font-size: 1.15rem; font-weight: 700; margin-top: 0.25rem; }
+  }
+
+  // Linee verticali decorative ai lati della card
+  &::before, &::after {
+    content: "";
+    position: absolute;
+    top: 12px;
+    bottom: 12px;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 1;
+  }
+  &::before { left: -18px; }
+  &::after  { right: -18px; }
+
+  // Su mobile le linee decorative vengono nascoste per mancanza di spazio
+  @media (max-width: $bp-sm) {
+    &::before, &::after { display: none; }
+  }
+
+  // Campi input in tema scuro
+  .form-control {
+    background: $sfondo-input;
+    color: #fff;
+    border: 1px solid $bordo-input;
+    border-radius: .5rem;
+    box-shadow: none;
+
+    &::placeholder { color: rgba(255, 255, 255, 0.6); }
+
+    &:focus {
+      border-color: var(--bs-danger);
+      box-shadow: 0 0 0 0.15rem rgba(139, 0, 0, 0.12);
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+    }
+  }
+
+  // Pulsante di submit Bootstrap danger
+  .btn-danger {
+    background: var(--bs-danger);
+    border-color: var(--bs-danger);
+    color: #fff;
+    font-weight: 600;
+  }
+
+  // Gruppo input (es. email + pulsante)
+  .input-group {
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+
+    .btn { padding: .375rem .6rem; }
+  }
+}

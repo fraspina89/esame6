@@ -1,0 +1,418 @@
+﻿// ===== VARIABILI =====
+
+$colore-accento:    #e87c25;                    // arancione principale 
+$colore-pericolo:   #e91e63;                    // rosa-rosso per il pulsante "Riproduci"
+$colore-successo:   #28a745;                    // verde badge "file selezionato"
+$sfondo-host:       #0b0b0d;                    // sfondo dell'intera pagina
+$sfondo-card:       #111214;                    // sfondo card film correlati
+$sfondo-modal:      #141416;                    // sfondo del modal NgBootstrap
+$sfondo-form:       #1e1e22;                    // sfondo input/card in tema dark
+$sfondo-form-focus: #26262c;                    // sfondo input al focus
+$testo-chiaro:      #e9ecef;                    // testo principale chiaro
+$testo-muted:       #adb5bd;                    // testo secondario / badge video
+$bordo-card:        rgba(255, 255, 255, 0.04);  // bordo sottile sulle card
+$bordo-scuro:       rgba(255, 255, 255, 0.15);  // bordo input su sfondo scuro
+
+
+// ===== MIXIN =====
+
+// Pulsante trasparente con bordo colorato; al hover si riempie col colore del bordo.
+@mixin btn-bordo($colore) {
+  background: transparent;
+  color: $colore;
+  border: 1px solid $colore;
+  border-radius: .3rem;
+  padding: .55rem 1.2rem;
+  font-size: .95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color .2s, color .2s;
+
+  &:hover {
+    background: $colore;
+    color: #000;
+  }
+}
+
+
+// ===== HOST =====
+
+:host {
+  display: block;
+  background-color: $sfondo-host;
+  color: $testo-chiaro;
+  min-height: 100vh;
+}
+
+
+// ===== HERO (immagine di sfondo + gradiente) =====
+
+.detail-hero {
+  position: relative;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+// Immagine di sfondo a piena larghezza (locandina)
+.detail-bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 55%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  z-index: 0;
+}
+
+// Gradiente da sinistra (nero pieno) verso destra (trasparente) per leggibilità testo
+.detail-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    #000 0%,
+    #000 35%,
+    rgba(0,0,0,.97) 45%,
+    rgba(0,0,0,.80) 55%,
+    rgba(0,0,0,.30) 65%,
+    transparent 75%
+  );
+  z-index: 1;
+}
+
+// Contenuto testo sovrapposto all'immagine (titolo, meta, pulsanti)
+.detail-content {
+  position: relative;
+  z-index: 2;
+  padding: 2.5rem 1.5rem;
+}
+
+// Titolo principale del film
+.detail-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: .6rem;
+  line-height: 1.15;
+}
+
+// Meta-info in arancione (anno, durata, categoria)
+.detail-meta {
+  color: $colore-accento;
+  font-size: .95rem;
+  font-weight: 500;
+  margin-bottom: .8rem;
+}
+
+// Descrizione breve del film
+.detail-desc {
+  color: rgba(255,255,255,.88);
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  max-width: 440px;
+}
+
+// Tabella info (Regista, Interpreti, Genere) con etichette colorate
+.detail-info {
+  border-collapse: collapse;
+  margin-bottom: 1.4rem;
+
+  td { padding: .15rem .6rem .15rem 0; font-size: .88rem; vertical-align: top; }
+
+  .info-label {
+    color: $colore-accento;
+    white-space: nowrap;
+    padding-right: 1rem;
+  }
+
+  .info-value { color: rgba(255,255,255,.85); }
+}
+
+// Riga pulsanti azione (Riproduci, Modifica, Elimina)
+.detail-actions {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  flex-wrap: wrap;
+  margin-bottom: .75rem;
+
+  @media (max-width: 430px) {
+    flex-wrap: nowrap;
+    gap: .5rem;
+  }
+}
+
+// Pulsante "Riproduci" 
+.btn-riproduci {
+  background: $colore-pericolo;
+  color: #fff;
+  border: none;
+  border-radius: .3rem;
+  padding: .55rem 1.4rem;
+  font-size: .95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color .2s;
+
+  &:hover { background: #c2185b; }
+
+  @media (max-width: 430px) {
+    padding: .35rem .9rem;
+    font-size: .8rem;
+  }
+}
+
+// Pulsanti Modifica ed Elimina 
+.btn-modifica {
+  @include btn-bordo(#ffc107);
+
+  @media (max-width: 430px) { padding: .35rem .9rem; font-size: .8rem; }
+}
+.btn-elimina {
+  @include btn-bordo(#dc3545);
+
+  @media (max-width: 430px) { padding: .35rem .9rem; font-size: .8rem; }
+}
+
+// Testo piccolo "Termini di utilizzo" sotto i pulsanti
+.detail-terms {
+  font-size: .78rem;
+  color: rgba(255,255,255,.45);
+  margin: 0;
+}
+
+.terms-link {
+  color: $colore-accento;
+  &:hover { color: #ff9d4d; }
+}
+
+
+// ===== VIDEO =====
+
+// Wrapper nero che contiene il player video del film
+.detail-video-wrap {
+  background: #000;
+  padding: 1.5rem 0;
+}
+
+// Video a larghezza piena, altezza massima limitata
+.detail-video {
+  width: 100%;
+  max-height: 500px;
+  display: block;
+  border-radius: .3rem;
+}
+
+
+// ===== SECTION TITLE =====
+
+.section-title {
+  margin: 2.5rem 0 1rem;
+  padding-left: .25rem;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: $testo-chiaro;
+}
+
+
+// ===== CARD HOVER (film correlati / top 5 settimana) =====
+
+// Card con sfondo scuro e bordo sottile
+.card {
+  background: $sfondo-card;
+  border: 1px solid $bordo-card;
+  color: $testo-chiaro;
+  padding: 0;
+  overflow: visible;
+}
+
+// Effetto hover: scala la card e porta in primo piano (z-index)
+.card-hover {
+  position: relative;
+  transition: transform .22s ease, box-shadow .22s ease;
+  transform-origin: center top;
+
+  &:hover, &.playing {
+    transform: scale(1.06);
+    z-index: 40;
+    box-shadow: 0 20px 40px rgba(0,0,0,.45);
+  }
+
+  // Quando il video è pronto, nasconde il thumbnail e mostra il video
+  &.video-ready {
+    .thumb      { opacity: 0; }
+    .card-video { opacity: 1; }
+  }
+}
+
+// Wrapper immagine/video della card
+.media-wrap {
+  position: relative;
+  height: 160px;
+  overflow: hidden;
+}
+
+// Thumbnail dell'immagine di copertina
+.thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity .28s;
+}
+
+// Video in sovrimpressione (autoplay muted al hover)
+.card-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity .28s;
+  z-index: 1;
+}
+
+// Pannello descrizione che scende al hover sulla card
+.hover-panel {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height .35s ease;
+
+  &.show {
+    max-height: 250px;
+  }
+}
+
+
+// ===== MODAL MODIFICA FILM (NgBootstrap) =====
+
+// Contenitore del modal in tema scuro 
+.modal-dark-custom {
+  background: $sfondo-modal;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: .6rem;
+  color: $testo-chiaro;
+}
+
+// Override dark per input, select e textarea Bootstrap
+.form-ctrl-dark {
+  background-color: $sfondo-form !important;
+  color: $testo-chiaro !important;
+  border-color: $bordo-scuro !important;
+
+  &:focus {
+    background-color: $sfondo-form-focus !important;
+    border-color: $colore-accento !important;
+    box-shadow: 0 0 0 .2rem rgba(232, 124, 37, .25) !important;
+    color: #fff !important;
+  }
+
+  option { background: $sfondo-form; }
+}
+
+// Floating label: grigio a riposo, arancione a focus / compilato
+.form-floating {
+  > .form-ctrl-dark ~ label { color: #6c757d !important; }
+
+  > .form-ctrl-dark:focus ~ label,
+  > .form-ctrl-dark:not(:placeholder-shown) ~ label {
+    color: $colore-accento !important;
+  }
+}
+
+// Divisore visivo tra sezioni del form (es. "Dati principali" / "Media")
+.section-divider-label {
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: $colore-accento;
+  margin-bottom: .75rem;
+  padding-bottom: .35rem;
+  border-bottom: 1px solid rgba(232,124,37,.25);
+}
+
+// Card per upload file (locandina / carousel / video)
+.media-upload-card {
+  position: relative;
+  background: $sfondo-form;
+  border: 1.5px dashed $bordo-scuro;
+  border-radius: .5rem;
+  overflow: hidden;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: border-color .2s;
+
+  &:hover { border-color: $colore-accento; }
+
+  // Variante orizzontale per il video 
+  &--wide {
+    flex-direction: row;
+    gap: 1rem;
+    min-height: 72px;
+    padding: 0 1.5rem;
+    justify-content: flex-start;
+  }
+}
+
+// Anteprima dell'immagine già caricata, semitrasparente sotto la label
+.media-thumb {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: .35;
+}
+
+// Badge verde "file selezionato" in alto a destra sulla card
+.media-new-badge {
+  position: absolute;
+  top: .4rem;
+  right: .4rem;
+  background: $colore-successo;
+  color: #fff;
+  font-size: .65rem;
+  font-weight: 700;
+  padding: .15rem .4rem;
+  border-radius: .25rem;
+  z-index: 2;
+}
+
+// Etichetta testo accanto all'icona video nella card --wide
+.video-badge {
+  font-size: .78rem;
+  color: $testo-muted;
+  margin-right: .5rem;
+}
+
+// Label cliccabile che apre il file picker
+.media-upload-label {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  padding: .75rem 1rem;
+  gap: .2rem;
+}
+
+.upload-icon { font-size: 1.5rem; }
+
+// Testo descrittivo dell'upload 
+.upload-text {
+  font-size: .82rem;
+  font-weight: 600;
+  color: #ccc;
+}
+

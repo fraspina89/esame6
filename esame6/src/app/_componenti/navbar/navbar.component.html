@@ -1,0 +1,88 @@
+<!-- ===== NAVBAR NON LOGGATO: semplice, solo Home + Accedi ===== -->
+<ng-container *ngIf="auth.tk === null">
+  <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" routerLink="/" title="Home">
+        <strong class="text-danger">CO</strong>DE
+      </a>
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/">Home</a>
+        </li>
+      </ul>
+      <div class="d-flex ms-auto">
+        <a class="btn btn-danger" routerLink="/login">Accedi</a>
+      </div>
+    </div>
+  </nav>
+</ng-container>
+
+<!-- ===== NAVBAR LOGGATO: offcanvas con Tipologia, Genere, Search, Utente ===== -->
+<ng-container *ngIf="auth.tk !== null">
+  <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+    <div class="container-fluid">
+
+      <!-- Logo -->
+      <a class="navbar-brand" routerLink="/catalogo" title="Catalogo">
+        <strong class="text-danger">CO</strong>DE
+      </a>
+
+      <!-- Hamburger → offcanvas -->
+      <button class="navbar-toggler" type="button"
+        data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvas"
+        aria-controls="navbarOffcanvas" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Offcanvas -->
+      <div class="offcanvas offcanvas-start" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header bg-warning">
+          <h5 class="offcanvas-title">Menu</h5>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Chiudi"></button>
+        </div>
+        <div class="offcanvas-body bg-dark">
+
+          <!-- Links navigazione -->
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/catalogo">Catalogo</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Genere</a>
+              <ul class="dropdown-menu dropdown-menu-dark">
+                <li><a class="dropdown-item" routerLink="/catalogo/categoria/3">Azione</a></li>
+                <li><a class="dropdown-item" routerLink="/catalogo/categoria/1">Horror</a></li>
+                <li><a class="dropdown-item" routerLink="/catalogo/categoria/2">Commedia</a></li>
+                <li><a class="dropdown-item" routerLink="/catalogo/categoria/5">Drammatico</a></li>
+                <li><a class="dropdown-item" routerLink="/catalogo/categoria/4">Thriller</a></li>
+              </ul>
+            </li>
+          </ul>
+
+          <!-- Search bar -->
+          <form class="d-flex align-items-center me-2" (ngSubmit)="cercaFilm()">
+            <input class="form-control form-control-sm search-input" type="search"
+              placeholder="Cerca" [(ngModel)]="queryRicerca" name="ricerca">
+            <button class="btn btn-sm btn-search ms-1" type="submit" title="Cerca">🔍</button>
+          </form>
+
+          <!-- Utente loggato -->
+          <ul class="d-flex navbar-nav align-items-center">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                {{ auth.nome }}
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+                <li><a class="dropdown-item" routerLink="/profilo">Dati Personali</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-danger" (click)="logout()">Esci</a></li>
+              </ul>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+  </nav>
+</ng-container>
+

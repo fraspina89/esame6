@@ -1,0 +1,69 @@
+<!-- utente NON loggato: mostra il form -->
+<ng-container *ngIf="auth.tk === null">
+
+  <main class="hero d-flex align-items-center">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-9 col-lg-6">
+          <div class="card card-registrazione mx-auto" style="max-width:520px;">
+            <div class="card-body p-4">
+
+              <h3 class="card-title text-center mb-3">
+                <span class="line1"><strong class="text-danger">ACC</strong>EDI</span>
+              </h3>
+
+              <!-- messaggio errore -->
+              <div *ngIf="errore" class="alert alert-danger py-2 text-center">{{ errore }}</div>
+
+              <form [formGroup]="reactiveForm" (ngSubmit)="accedi()">
+
+                <div class="mb-3 text-center">
+                  <label for="utente" class="form-label d-block text-center mb-2">Inserisci qui la tua email</label>
+                  <div class="input-group mb-3">
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="utente"
+                      formControlName="utente"
+                      placeholder="nome@esempio.com">
+                  </div>
+                </div>
+
+                <div class="mb-3 text-center">
+                  <label for="password" class="form-label d-block text-center mb-2">Password</label>
+                  <div class="input-group mb-3">
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="password"
+                      formControlName="password"
+                      placeholder="••••••••">
+                    <button class="btn btn-danger btn-sm" type="submit" [disabled]="reactiveForm.invalid || stoControllando">
+                      <span *ngIf="!stoControllando">Accedi</span>
+                      <span *ngIf="stoControllando">
+                        <span class="spinner-border spinner-border-sm" role="status"></span>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+</ng-container>
+
+<!-- utente GIÀ loggato -->
+<ng-container *ngIf="auth.tk !== null">
+  <main class="hero d-flex align-items-center justify-content-center">
+    <div class="text-center text-white">
+      <h3>Sei già autenticato come <strong class="text-danger">{{ auth.nome }}</strong></h3>
+      <a class="btn btn-outline-danger mt-3" routerLink="/">Vai alla home</a>
+    </div>
+  </main>
+</ng-container>

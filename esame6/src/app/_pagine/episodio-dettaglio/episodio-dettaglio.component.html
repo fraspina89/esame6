@@ -1,0 +1,235 @@
+<!-- Spinner -->
+<div *ngIf="caricamento" class="text-center py-5">
+  <div class="spinner-border text-danger" role="status">
+    <span class="visually-hidden">Caricamento...</span>
+  </div>
+</div>
+
+<!-- Errore -->
+<div *ngIf="errore" class="container py-4">
+  <div class="alert alert-danger">{{ errore }}</div>
+</div>
+
+<ng-container *ngIf="!caricamento && episodio">
+
+  <!-- ===== HERO ===== -->
+  <section class="detail-hero">
+    <img [src]="imgFallback" class="detail-bg" [alt]="episodio.titolo || ''" />
+    <div class="detail-overlay"></div>
+
+    <div class="container detail-content">
+
+      <!-- Breadcrumb / back -->
+      <p class="detail-breadcrumb">
+        <a class="breadcrumb-link" (click)="tornaSerie()">&#8592; {{ serieNome || 'Serie TV' }}</a>
+        <span *ngIf="episodio.numeroStagione"> &nbsp;/&nbsp; Stagione {{ episodio.numeroStagione }}</span>
+        <span *ngIf="episodio.numeroEpisodio"> &nbsp;·&nbsp; Episodio {{ episodio.numeroEpisodio }}</span>
+      </p>
+
+      <h1 class="detail-title">{{ episodio.titolo }}</h1>
+
+      <p class="detail-meta">
+        <span *ngIf="episodio.durata">{{ episodio.durata }} min</span>
+        <span *ngIf="episodio.durata && episodio.anno"> &nbsp;&nbsp; </span>
+        <span *ngIf="episodio.anno">Anno: {{ episodio.anno }}</span>
+      </p>
+
+      <p class="detail-desc" *ngIf="episodio.descrizione">{{ episodio.descrizione }}</p>
+
+      <div class="detail-actions">
+        <button class="btn-riproduci" *ngIf="episodio.idFilmato" (click)="toggleVideo()">
+          &#9654; {{ videoAperto ? 'Chiudi' : 'Riproduci' }}
+        </button>
+        <button class="btn-aggiungi" *ngIf="auth.idRuolo === 1" (click)="apriAggiungi(modalAggiungiEpisodio)">
+          + Aggiungi Episodio
+        </button>
+        <button class="btn-modifica" *ngIf="auth.idRuolo === 1" (click)="apriModifica(modalModificaEpisodio)">
+          &#9998; Modifica
+        </button>
+        <button class="btn-elimina" *ngIf="auth.idRuolo === 1" (click)="apriElimina(modalConfermaElimina)">
+          &#128465; Elimina
+        </button>
+      </div>
+
+      <p class="detail-terms" *ngIf="episodio.idFilmato">
+        Facendo click su Riproduci accetti i nostri
+        <a href="#" class="terms-link" (click)="$event.preventDefault()">Termini di utilizzo</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== VIDEO PLAYER (toggle) ===== -->
+  <div class="detail-video-wrap" *ngIf="videoAperto && episodio.idFilmato">
+    <div class="container">
+      <video
+        [src]="episodio.idFilmato"
+        controls
+        autoplay
+        class="detail-video">
+      </video>
+    </div>
+  </div>
+
+</ng-container>
+
+<!-- ===== MODAL MODIFICA EPISODIO ===== -->
+<ng-template #modalModificaEpisodio let-modal>
+  <div class="modal-content modal-dark-custom">
+    <div class="modal-header border-bottom border-secondary px-4 pt-4 pb-3">
+      <div>
+        <h5 class="modal-title fw-bold text-white mb-0">&#9998; Modifica Episodio</h5>
+        <small class="text-warning">{{ episodio?.titolo }}</small>
+      </div>
+      <button type="button" class="btn-close btn-close-white" (click)="modal.dismiss()"></button>
+    </div>
+
+    <div class="modal-body px-4 py-3" style="max-height:70vh; overflow-y:auto">
+      <div *ngIf="formErrore"    class="alert alert-danger border-0 rounded-3 py-2 mb-3">{{ formErrore }}</div>
+      <div *ngIf="formMessaggio" class="alert alert-success border-0 rounded-3 py-2 mb-3">{{ formMessaggio }}</div>
+      <form>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control form-ctrl-dark" id="fTitolo"
+                 placeholder="Titolo" [(ngModel)]="formTitolo" name="titolo" required>
+          <label for="fTitolo" class="text-secondary">Titolo <span class="text-danger">*</span></label>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <div class="col-md-3">
+            <div class="form-floating">
+              <input type="number" class="form-control form-ctrl-dark" id="fStagione"
+                     placeholder="Stagione" [(ngModel)]="formNumeroStagione" name="numeroStagione" min="1">
+              <label for="fStagione" class="text-secondary">Stagione</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-floating">
+              <input type="number" class="form-control form-ctrl-dark" id="fEpisodio"
+                     placeholder="Episodio" [(ngModel)]="formNumeroEpisodio" name="numeroEpisodio" min="1">
+              <label for="fEpisodio" class="text-secondary">N. Episodio</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-floating">
+              <input type="number" class="form-control form-ctrl-dark" id="fDurata"
+                     placeholder="Durata" [(ngModel)]="formDurata" name="durata" min="1">
+              <label for="fDurata" class="text-secondary">Durata (min)</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-floating">
+              <input type="number" class="form-control form-ctrl-dark" id="fAnno"
+                     placeholder="Anno" [(ngModel)]="formAnno" name="anno" min="1900" max="2099">
+              <label for="fAnno" class="text-secondary">Anno</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-floating mb-3">
+          <textarea class="form-control form-ctrl-dark" id="fDesc"
+                    placeholder="Descrizione" style="height:100px"
+                    [(ngModel)]="formDescrizione" name="descrizione"></textarea>
+          <label for="fDesc" class="text-secondary">Descrizione</label>
+        </div>
+      </form>
+    </div>
+
+    <div class="modal-footer border-top border-secondary px-4 py-3">
+      <button class="btn btn-outline-secondary" (click)="modal.dismiss()" [disabled]="formCaricamento">Annulla</button>
+      <button class="btn btn-warning text-dark fw-semibold px-4" (click)="salvaModifica()"
+              [disabled]="formCaricamento || !formTitolo.trim()">
+        <span *ngIf="formCaricamento" class="spinner-border spinner-border-sm me-2"></span>
+        <span *ngIf="!formCaricamento">&#10004;</span> Salva Modifiche
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<!-- ===== MODAL CONFERMA ELIMINA ===== -->
+<ng-template #modalConfermaElimina let-modal>
+  <div class="modal-content modal-dark-custom">
+    <div class="modal-header border-0 pb-0">
+      <h5 class="modal-title fw-bold text-danger">&#9888; Elimina Episodio</h5>
+      <button type="button" class="btn-close btn-close-white" (click)="modal.dismiss()"></button>
+    </div>
+    <div class="modal-body pt-2">
+      <p class="mb-1">Sei sicuro di voler eliminare <strong class="text-warning">{{ episodio?.titolo }}</strong>?</p>
+      <small class="text-secondary">Questa operazione non può essere annullata.</small>
+    </div>
+    <div class="modal-footer border-0">
+      <button class="btn btn-outline-secondary" (click)="modal.dismiss()">Annulla</button>
+      <button class="btn btn-danger" (click)="confermaElimina()">&#128465; Elimina</button>
+    </div>
+  </div>
+</ng-template>
+
+<!-- ===== MODAL AGGIUNGI EPISODIO ===== -->
+<ng-template #modalAggiungiEpisodio let-modal>
+  <div class="modal-content modal-dark-custom">
+    <div class="modal-header border-bottom border-secondary px-4 pt-4 pb-3">
+      <div>
+        <h5 class="modal-title fw-bold text-white mb-0">+ Aggiungi Episodio</h5>
+        <small class="text-warning">{{ serieNome }}</small>
+      </div>
+      <button type="button" class="btn-close btn-close-white" (click)="modal.dismiss()"></button>
+    </div>
+
+    <div class="modal-body px-4 py-3" style="max-height:70vh; overflow-y:auto">
+      <div *ngIf="aggErrore"    class="alert alert-danger border-0 rounded-3 py-2 mb-3">{{ aggErrore }}</div>
+      <div *ngIf="aggMessaggio" class="alert alert-success border-0 rounded-3 py-2 mb-3">{{ aggMessaggio }}</div>
+      <form>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control form-ctrl-dark" id="aTitolo"
+                 placeholder="Titolo" [(ngModel)]="aggTitolo" name="aggTitolo" required>
+          <label for="aTitolo" class="text-secondary">Titolo <span class="text-danger">*</span></label>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <div class="col-md-3">
+            <div class="form-floating">
+              <input type="number" class="form-control form-ctrl-dark" id="aStagione"
+                     placeholder="Stagione" [(ngModel)]="aggNumeroStagione" name="aggNumeroStagione" min="1">
+              <label for="aStagione" class="text-secondary">Stagione</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-floating">
+              <input type="number" class="form-control form-ctrl-dark" id="aEpisodio"
+                     placeholder="Episodio" [(ngModel)]="aggNumeroEpisodio" name="aggNumeroEpisodio" min="1">
+              <label for="aEpisodio" class="text-secondary">N. Episodio</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-floating">
+              <input type="number" class="form-control form-ctrl-dark" id="aDurata"
+                     placeholder="Durata" [(ngModel)]="aggDurata" name="aggDurata" min="1">
+              <label for="aDurata" class="text-secondary">Durata (min)</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-floating">
+              <input type="number" class="form-control form-ctrl-dark" id="aAnno"
+                     placeholder="Anno" [(ngModel)]="aggAnno" name="aggAnno" min="1900" max="2099">
+              <label for="aAnno" class="text-secondary">Anno</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-floating mb-3">
+          <textarea class="form-control form-ctrl-dark" id="aDesc"
+                    placeholder="Descrizione" style="height:100px"
+                    [(ngModel)]="aggDescrizione" name="aggDescrizione"></textarea>
+          <label for="aDesc" class="text-secondary">Descrizione</label>
+        </div>
+      </form>
+    </div>
+
+    <div class="modal-footer border-top border-secondary px-4 py-3">
+      <button class="btn btn-outline-secondary" (click)="modal.dismiss()" [disabled]="aggCaricamento">Annulla</button>
+      <button class="btn btn-success fw-semibold px-4" (click)="salvaAggiungi()"
+              [disabled]="aggCaricamento || !aggTitolo.trim()">
+        <span *ngIf="aggCaricamento" class="spinner-border spinner-border-sm me-2"></span>
+        <span *ngIf="!aggCaricamento">+</span> Aggiungi
+      </button>
+    </div>
+  </div>
+</ng-template>

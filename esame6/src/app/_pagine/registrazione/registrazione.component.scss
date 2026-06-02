@@ -1,0 +1,428 @@
+﻿// ===================================================
+// RegistrazioneComponent — stile
+// Form di registrazione a più step in stile dark Netflix.
+// Le variabili raccolgono i colori usati più volte nel file.
+// Stili ereditati e adattati da esame5/styles/main.scss.
+// ===================================================
+
+
+// ===== VARIABILI =====
+
+$sfondo-card:    rgba(8, 12, 18, 0.85);      // sfondo card di registrazione
+$sfondo-input:   rgba(255, 255, 255, 0.03);  // sfondo campi input
+$sfondo-focus:   rgba(255, 255, 255, 0.04);  // sfondo input al focus
+$sfondo-dark:    rgba(8, 12, 18, 0.95);      // sfondo dropdown / autocomplete
+$bordo-card:     rgba(255, 255, 255, 0.06);  // bordo card
+$testo-chiaro:   rgba(255, 255, 255, 0.95);  // testo campi input
+$testo-muted:    rgba(255, 255, 255, 0.75);  // label / placeholder
+
+$bp-lg-max: 1199.98px;  // sotto xl  (< 1200px) — copre anche 1024px
+$bp-md-max:  767.98px;  // sotto md  (< 768px)
+$bp-sm-max:  575.98px;  // sotto sm  (< 576px)
+
+
+:host {
+  display: block;
+}
+
+// Sezione hero: immagine di sfondo con overlay scuro (stile esame5)
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3.5rem 1rem 2rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: calc(100vh - 140px);
+}
+
+section.hero+.container {
+  margin-top: 4rem;
+}
+
+// Logo inline nei testi
+.label-logo {
+  height: 20px;
+  width: auto;
+  vertical-align: middle;
+  margin-left: .4rem;
+  filter: brightness(1.6);
+}
+
+.logo-img {
+  background-color: transparent;
+  filter: brightness(0.95) contrast(1.02);
+}
+
+.logo-outline {
+  filter: grayscale(1) contrast(1.2) brightness(0.12);
+  mix-blend-mode: multiply;
+}
+
+// Card di registrazione: sfondo scuro per contrastare il tema Bootstrap chiaro
+.card-registrazione {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+  width: 100%;
+  border-radius: 0.75rem;
+  background-color: $sfondo-card;
+  color: #fff;
+  border: 1px solid $bordo-card;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.45);
+  overflow: visible;
+  margin: 0 auto;
+  min-height: 180px;
+
+  // Campi input in tema scuro
+  .form-control {
+    background-color: $sfondo-input;
+    color: $testo-chiaro;
+    border: none;
+    box-shadow: none;
+    padding: .28rem .45rem;
+    border-radius: .25rem;
+    height: auto;
+    font-size: .95rem;
+
+    &::placeholder { color: rgba(255, 255, 255, 0.6); }
+
+    &:focus {
+      outline: none;
+      box-shadow: none;
+      background-color: $sfondo-focus;
+      color: $testo-chiaro;
+    }
+
+    &.is-invalid {
+      border: 1px solid var(--bs-danger);
+      box-shadow: 0 0 0 .15rem rgba(220, 53, 69, 0.15);
+      background-color: rgba(220, 53, 69, 0.03);
+    }
+  }
+
+  .form-check-label {
+    color: $testo-muted;
+  }
+
+  // Form floating: label sovrapposta al campo che risale al focus
+  .form-floating {
+    position: relative;
+
+    .form-control {
+      padding: 1.15rem .6rem .45rem;
+      height: auto;
+    }
+
+    label {
+      z-index: 2;
+      pointer-events: none;
+      color: $testo-muted;
+      padding-left: .15rem;
+    }
+
+    .input-group .form-control { padding-right: .6rem; }
+
+    .form-control:focus ~ label,
+    .form-control:not(:placeholder-shown) ~ label {
+      color: rgba(255, 255, 255, 0.85);
+    }
+  }
+
+  // Uniforma le select ai form-control della card (stile dark)
+  .form-select,
+  .form-select.form-select-sm {
+    background-color: $sfondo-input;
+    color: #fff;
+    border: none;
+    box-shadow: none;
+    padding: .28rem .45rem;
+    border-radius: .25rem;
+    height: auto;
+    font-size: .95rem;
+  }
+
+  .form-select::placeholder,
+  .form-select option { color: rgba(255, 255, 255, 0.6); }
+
+  // Select al focus: sfondo leggermente più chiaro
+  .form-select:focus {
+    outline: none;
+    box-shadow: none;
+    background-color: $sfondo-focus;
+    color: #fff;
+  }
+
+  // Colori option del dropdown (supporto browser variabile)
+  .form-select option,
+  .form-select optgroup {
+    background-color: $sfondo-input;
+    color: #fff;
+  }
+
+  // Edge/IE: nasconde la freccia nativa della select
+  .form-select::-ms-expand { display: none; }
+
+  // Chrome/Firefox: migliora il contrasto durante il focus sulla select chiusa
+
+  .card-body {
+    padding: 0.6rem;
+  }
+
+  .card-title {
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 1.25rem;
+    letter-spacing: .01em;
+
+    .line1 {
+      display: block;
+      font-size: 1.55rem;
+      line-height: 1.05;
+    }
+
+    .line2 {
+      display: block;
+      font-size: 1.55rem;
+      font-weight: 800;
+      margin-top: 0.15rem;
+    }
+  }
+
+  &::before { left: -18px; }
+  &::after  { right: -18px; }
+
+  &::before, &::after {
+    content: "";
+    position: absolute;
+    top: 12px;
+    bottom: 12px;
+    width: 2px;
+    background: $bordo-card;
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  // Assicura che gli elementi interattivi dentro la card ricevano i click
+  pointer-events: auto;
+  * { pointer-events: auto; }
+
+  // Porta il pulsante in primo piano se qualcosa si sovrappone
+  .btn {
+    position: relative;
+    z-index: 5;
+    cursor: pointer;
+  }
+}
+
+// Nasconde l'icona ! di Bootstrap nei campi stretti dove si sovrappone al placeholder
+.no-validation-icon.is-invalid,
+.no-validation-icon.is-valid { background-image: none; }
+
+.field-with-star { position: relative; }
+// padding-right extra rimosso: .input-star non è presente nel template (l'asterisco
+// è già nel testo del placeholder), quindi 2.25rem di spazio sprecato causava troncamento.
+.field-with-star.star-left .form-control { padding-left: 2.25rem; padding-right: .6rem; }
+.field-with-star .input-star { position: absolute; right: .75rem; top: 50%; transform: translateY(-50%); pointer-events: none; font-size: 1rem; line-height: 1; color: var(--bs-danger); }
+
+// Placeholder overlay per input type=date (mostra testo dentro la casella)
+.input-group.date-picker { position: relative; }
+.date-placeholder {
+  position: absolute;
+  left: .75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.6);
+  pointer-events: none;
+  font-size: .95rem;
+}
+.date-placeholder.hidden { display: none; }
+
+// Nasconde il testo di formato nativo (es. gg/mm/aaaa) quando non c'è valore;
+// quando l'input ha la classe .has-value mostra il valore selezionato
+input[type="date"]::-webkit-datetime-edit { color: transparent; }
+input[type="date"].has-value::-webkit-datetime-edit { color: rgba(255, 255, 255, 0.9); }
+// Firefox: nasconde il testo del date control se non ha valore
+input[type="date"]::-moz-placeholder { color: transparent; }
+input[type="date"].has-value { color: rgba(255, 255, 255, 0.95); }
+
+// Autocomplete suggestions (lista sotto il campo di ricerca)
+.suggestions-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 2px;
+  max-height: 200px;
+  overflow-y: auto;
+  background: $sfondo-dark;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: .25rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+  z-index: 1055;
+}
+.suggestions-list .list-group-item {
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  padding: .35rem .6rem;
+}
+.suggestions-list .list-group-item:hover { background: $sfondo-focus; }
+
+// Stili dark per dropdown-menu e dropdown-item (Bootstrap)
+.card-registrazione .dropdown-menu {
+  background-color: $sfondo-dark !important;
+  border: 1px solid $bordo-card !important;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6) !important;
+  color: #fff !important;
+}
+.card-registrazione .dropdown-item {
+  color: #fff !important;
+}
+.card-registrazione .dropdown-item:hover,
+.card-registrazione .dropdown-item:focus {
+  background-color: $bordo-card !important;
+  color: #fff !important;
+}
+
+// NgbTypeahead window: stesso stile dei ngbDropdown (es. sesso, data di nascita)
+::ng-deep ngb-typeahead-window.dropdown-menu {
+  background-color: $sfondo-dark !important;
+  border: 1px solid $bordo-card !important;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6) !important;
+  color: #fff !important;
+}
+::ng-deep ngb-typeahead-window .dropdown-item {
+  color: #fff !important;
+  background-color: transparent !important;
+}
+::ng-deep ngb-typeahead-window .dropdown-item:hover,
+::ng-deep ngb-typeahead-window .dropdown-item:focus,
+::ng-deep ngb-typeahead-window .dropdown-item.active {
+  background-color: $bordo-card !important;
+  color: #fff !important;
+}
+.card-registrazione .dropdown-toggle::after { filter: brightness(0.9); }
+
+// Pulsante del datepicker: aspetto coerente con gli altri campi input
+.card-registrazione .date-picker .form-control[readonly] {
+  background-color: $sfondo-input;
+  color: #fff;
+  cursor: pointer;
+}
+.card-registrazione .date-picker .btn {
+  border-left: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+// Toggle dropdown (sesso/data): aspetto identico agli altri input
+.card-registrazione .dropdown-toggle.form-control {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: auto;
+  padding: .28rem .45rem;
+  font-size: .95rem;
+  line-height: 1.2;
+  font-family: inherit;
+  border: none;
+  box-shadow: none;
+  border-radius: .25rem;
+  text-align: left;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.035);
+  color: rgba(255, 255, 255, 0.6);  // placeholder
+
+  &.filled {
+    color: rgba(255, 255, 255, 0.92);  // valore selezionato
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+// Select piccole (GG/MM/AAAA) dentro il dropdown: stile scuro coerente
+.card-registrazione .form-select.form-select-sm {
+  background-color: $sfondo-input;
+  color: #fff;
+  border: none;
+  box-shadow: none;
+}
+.card-registrazione .form-select.form-select-sm option {
+  background-color: $sfondo-dark;
+  color: #fff;
+}
+
+// Colori dropdown/option (nota: supporto variabile tra i browser)
+.card-registrazione .form-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: $sfondo-input;
+  color: #fff;
+}
+
+.card-registrazione .form-select option {
+  background-color: $sfondo-dark;
+  color: #fff;
+}
+
+.card-registrazione .form-select::-ms-expand { display: none; }
+
+.card-registrazione .form-select option:hover,
+.card-registrazione .form-select option:checked {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+
+// ===== RESPONSIVE =====
+
+// Sotto xl (< 1200px): riduci il padding laterale della card body.
+// Copre anche 1024px dove i 3 campi (Città/CAP/Prov) erano troppo stretti.
+// Il p-4 di Bootstrap usa !important quindi serve !important anche qui.
+@media (max-width: $bp-lg-max) {
+  .card-registrazione .card-body { padding: 1.25rem !important; }
+}
+
+// Sotto md (< 768px): il form passa a colonna singola — si guadagna larghezza,
+
+@media (max-width: $bp-md-max) {
+  .card-registrazione .card-body { padding: 1rem !important; }
+
+  // Riduce leggermente font e padding degli input per guadagnare spazio utile
+  .card-registrazione .form-control,
+  .card-registrazione .dropdown-toggle.form-control {
+    font-size: 0.875rem;
+    padding: .22rem .38rem;
+  }
+}
+
+// Sotto sm (< 576px): mobile stretto (375px, 320px).
+@media (max-width: $bp-sm-max) {
+  .card-registrazione .card-body { padding: 0.75rem !important; }
+
+  // Font e padding ridotti: guadagna ~12px per campo (6px per lato) = N° visibile
+  .card-registrazione .form-control,
+  .card-registrazione .dropdown-toggle.form-control {
+    font-size: 0.82rem;
+    padding: .15rem .28rem;
+  }
+
+  // Bottone "Mostra" (password): compatto per cedere spazio all'input
+  .card-registrazione .input-group .btn {
+    padding: .15rem .5rem;
+    font-size: 0.82rem;
+  }
+
+  // Il testo "Accetto i termini..." non deve uscire dal bordo
+  .card-registrazione .form-check-label {
+    white-space: normal;
+    font-size: 0.85rem;
+  }
+}

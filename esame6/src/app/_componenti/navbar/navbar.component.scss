@@ -1,0 +1,69 @@
+﻿
+// ===== VARIABILI =====
+
+$sfondo-navbar: #0d0d0f;  // sfondo barra di navigazione 
+$sfondo-search: #1f2123;  // sfondo casella di ricerca
+$testo-chiaro:  #e9ecef;  // testo principale chiaro
+$colore-hover:  #ff6b6b;  // rosso soft per hover sull'icona di ricerca
+
+
+// Navbar principale Bootstrap 
+nav.navbar {
+  background-color: $sfondo-navbar !important;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  min-height: 70px;
+
+  .navbar-brand { font-size: 1.6rem; letter-spacing: 1px; }
+  .nav-link     { font-size: 1.1rem; }
+  .btn          { font-size: 1rem; padding: 0.5rem 1.2rem; }
+}
+
+// Offcanvas (menu laterale mobile) 
+.offcanvas-body.bg-dark {
+  background-color: $sfondo-navbar !important;
+}
+
+// Input di ricerca
+.search-input {
+  background-color: $sfondo-search;
+  color: #fff;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  padding: .35rem .6rem;
+  border-radius: .25rem;
+  width: 180px;
+
+  &::placeholder { color: rgba(255, 255, 255, 0.6); }
+
+  &:focus {
+    box-shadow: none !important;
+    outline: none;
+    background-color: $sfondo-search;
+    color: #fff;
+  }
+}
+
+// Pulsante icona di ricerca 
+.btn-search {
+  background: transparent;
+  color: $testo-chiaro;
+  border: none;
+  box-shadow: none;
+  padding: 0 .25rem;
+  font-size: 1rem;
+  line-height: 1;
+
+  &:hover  { color: $colore-hover; background: transparent; }
+  &:focus,
+  &:active { box-shadow: none; outline: none; }
+}
+
+// Il form di ricerca non deve espandersi nella navbar
+form.d-flex {
+  flex-shrink: 0;
+}
+
+// Link azioni senza href 
+.dropdown-item { cursor: pointer; }

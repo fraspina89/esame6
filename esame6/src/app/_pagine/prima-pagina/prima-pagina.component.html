@@ -1,0 +1,37 @@
+<main class="hero d-flex align-items-center">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-9 col-lg-6">
+
+        <!-- Card iniziale con solo il campo email -->
+        <div class="card card-registrazione mx-auto" style="max-width:520px;" *ngIf="!mostraForm">
+          <div class="card-body p-4">
+            <h3 class="card-title text-center mb-3">
+              <span class="line1">Un mondo di intrattenimento con</span>
+              <span class="line2">un semplice click</span>
+            </h3>
+            <div class="mb-3 text-center">
+              <label for="emailHome" class="form-label d-block text-center mb-2">
+                Inserisci qui la tua email ed iscriviti a
+                <strong class="text-danger ms-2">CO</strong>DE
+              </label>
+              <div class="input-group mb-3">
+                <input type="email" class="form-control" id="emailHome" placeholder="nome@esempio.com"
+                  [(ngModel)]="emailHome" [class.is-invalid]="emailError" (input)="emailError = false">
+                <button class="btn btn-danger btn-sm" type="button" (click)="avviaRegistrazione()">Registrati</button>
+              </div>
+              <div *ngIf="emailError" class="text-danger small mt-1">Inserisci un indirizzo email valido per continuare.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form di registrazione completo (stessa pagina) -->
+        <div *ngIf="mostraForm">
+          <app-registrazione [emailIniziale]="emailHome"></app-registrazione>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
